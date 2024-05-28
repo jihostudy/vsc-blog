@@ -9,6 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@mui/icons-material": "^5.15.18",
+    "@mui/system": "^5.15.15",
     "@nextui-org/react": "^2.3.6",
     "firebase": "^10.12.1",
     "framer-motion": "^11.2.6",
