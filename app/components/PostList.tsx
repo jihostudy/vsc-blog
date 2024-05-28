@@ -57,14 +57,14 @@ const PostList = ({ className }: PostListProps): ReactNode => {
     },
   ]);
   // States
-  const [prevFocus, setPrevFocus] = useState<string | null>(null); // 파일 생성 위치 판단 위해
+  const [focusFolder, setFocusFolder] = useState<string | null>(null); // 파일 생성 위치 판단 위해
   // Data
   const folder_list = dummyFolderList.map((folder) => {
     return (
       <li
         key={folder}
         className="hover:bg-[#37373D] cursor-pointer"
-        onClick={() => setPrevFocus(folder)}
+        onClick={() => setFocusFolder(folder)}
       >
         <ChevronRightIcon className="p-[2px]" />
         {folder}
@@ -77,7 +77,7 @@ const PostList = ({ className }: PostListProps): ReactNode => {
   return (
     <div className={className}>
       <ul className="flex items-center justify-between">
-        <li className="cursor-pointer">ADD Category</li>
+        <li className="cursor-pointer">ADD Folder</li>
         <li className="cursor-pointer">ADD post</li>
       </ul>
       {/* Category List */}
