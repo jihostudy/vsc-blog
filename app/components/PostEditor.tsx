@@ -5,7 +5,7 @@ import React, { FormEvent, ReactNode, useEffect, useState } from "react";
 import { postType, initPost } from "@/lib/templates/post";
 
 const PostEditor = (): ReactNode => {
-  const title = "nextjs post1";
+  const title = "nextjs post2";
   // State
   const [postContent, setPostContent] = useState<postType>(initPost);
   const [maxLineNumber, setMaxLineNumber] = useState<number>(1);
@@ -23,6 +23,8 @@ const PostEditor = (): ReactNode => {
     setPostContent((prev) => ({
       ...prev,
       title: title,
+      // folder 임시
+      folderName: "nextjs",
     }));
   }, []);
   // functions
@@ -36,7 +38,7 @@ const PostEditor = (): ReactNode => {
 
   const handleAddPost = (post: postType) => {
     addPost(post);
-    console.log("Clicked add post");
+    alert("글 등록됨");
   };
   return (
     <form

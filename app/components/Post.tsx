@@ -2,24 +2,50 @@
 import React, { ReactNode, useState } from "react";
 // components
 import PostEditor from "./PostEditor";
+// types
+import { postType, tabPostType } from "@/lib/templates/post";
+import PostDisplay from "./PostDisplay";
+import { findFirstMatchingElement } from "@/lib/functions/arrayFunctions";
 
 interface PostProps {
+  tabPostList: tabPostType[];
+  handleTabPostList: (
+    type: "open" | "close",
+    post: postType | tabPostType
+  ) => void;
+  handleDisplayPost: (post: tabPostType) => void;
   className: string;
 }
-const Post = ({ className }: PostProps): ReactNode => {
+const Post = ({
+  tabPostList,
+  handleTabPostList,
+  handleDisplayPost,
+  className,
+}: PostProps): ReactNode => {
   //style
   const tab_style =
     "bg-navbar w-fit h-full p-2 hover:bg-white hover:text-black cursor-pointer pr-4";
-  // dymmy_data
-  const [tabList, setTabList] = useState<string[]>([
-    "page.tsx",
-    "mdxprovider.tsx",
-  ]);
+
   // Data
-  const tabs = tabList.map((tab) => {
+  const displayPost = findFirstMatchingElement(
+    tabPostList,
+    (tabPost) => tabPost.display === true
+  );
+
+  const tabs = tabPostList.map((post) => {
     return (
-      <li key={tab} className={tab_style}>
-        {tab}
+      <li
+        key={post.id}
+        onClick={() => handleDisplayPost(post)}
+        className={tab_style}
+      >
+        {post.title}
+        <button
+          onClick={() => handleTabPostList("close", post)}
+          className="hover:bg-slate-800"
+        >
+          닫기
+        </button>
       </li>
     );
   });
@@ -32,7 +58,8 @@ const Post = ({ className }: PostProps): ReactNode => {
       </ul>
       {/* PostContent */}
       <div className="w-full h-full bg-post ">
-        <PostEditor />
+        <PostDisplay displayPost={displayPost as tabPostType} />
+        {/* <PostEditor /> */}
       </div>
     </div>
   );
