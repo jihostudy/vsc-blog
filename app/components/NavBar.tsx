@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import logo from "@/public/images/vscode_white.svg";
 // constants
 import { path } from "@/lib/templates/paths";
+import Link from "next/link";
 
 const NavBar = (): ReactNode => {
   // next
@@ -18,20 +19,20 @@ const NavBar = (): ReactNode => {
   const li_className =
     "h-[10%] flex justify-center items-center cursor-pointer";
   return (
-    <div className="z-10 flex flex-col justify-start items-center h-screen relative bg-navbar w-[5%] text-white">
+    <div className="z-10 flex flex-col justify-start items-center h-screen relative bg-navbar w-[5vw] text-white">
       <Image
+        onClick={() => router.push(mainPath)}
         className="p-2 h-[5%] aspect-square"
         src={logo}
         alt="vscode_image"
       />
       <ul className="p-2 w-full h-[95%]">
-        <li className={li_className} onClick={() => router.push(mainPath)}>
+        <Link href={mainPath} className={li_className}>
           File
-        </li>
-        <li className={li_className} onClick={() => router.push(addPostPath)}>
+        </Link>
+        <Link href={addPostPath} className={li_className}>
           작성하기
-        </li>
-        <li className={li_className}>통계</li>
+        </Link>
       </ul>
     </div>
   );

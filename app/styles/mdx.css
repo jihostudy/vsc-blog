@@ -1,0 +1,31 @@
+/* styles/mdx.css */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: bold;
+  margin: 1rem 0;
+}
+h1 {
+  font-size: larger;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+blockquote {
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-left: 0.25rem solid #ccc;
+  color: #666;
+}
+
+pre {
+  background: #f5f5f5;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 0.5rem;
+}

@@ -7,10 +7,6 @@ export interface postType {
   folderName: string;
 }
 
-export interface tabPostType extends postType {
-  display: boolean;
-}
-
 export const initPost = {
   id: "", // 파베 받은 data
   contents: "",
