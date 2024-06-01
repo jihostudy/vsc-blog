@@ -51,9 +51,9 @@ const Post = ({ className }: PostProps): ReactNode => {
   return (
     <div className={className}>
       {/* Tabs */}
-      <ul className="relative w-full h-9 bg-post flex justify-start items-center">
+      {/* <ul className="relative w-full h-9 bg-post flex justify-start items-center">
         {tabs}
-      </ul>
+      </ul> */}
       {/* PostContent */}
       <div className="w-full h-full bg-post text-white text-9xl">
         지호 블로그

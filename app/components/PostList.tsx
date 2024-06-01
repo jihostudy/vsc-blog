@@ -3,6 +3,7 @@ import React, { ReactNode, useState } from "react";
 import Link from "next/link";
 // Images & icons
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // context
 import usePostStore from "@/lib/context/postStore";
 import useTabStore from "@/lib/context/tabStore";
@@ -78,7 +79,12 @@ const PostList = (): ReactNode => {
             toggleFolder(folder.folderName);
           }}
         >
-          <ChevronRightIcon className="p-[2px]" />
+          {folder.isOpen ? (
+            <ExpandMoreIcon />
+          ) : (
+            <ChevronRightIcon className="p-[2px]" />
+          )}
+
           {folder.folderName}
         </div>
         {folder.isOpen && <ul className="flex flex-col">{displayFiles}</ul>}
@@ -88,10 +94,9 @@ const PostList = (): ReactNode => {
 
   return (
     <div className="w-[15vw] bg-postlist h-screen text-white">
-      <ul className="flex items-center justify-between">
-        <li className="cursor-pointer">ADD Folder</li>
-        <li className="cursor-pointer">ADD post</li>
-      </ul>
+      <div className="p-3 flex items-center justify-between">
+        Source Control
+      </div>
       {/* Folder List */}
       {folder_list}
     </div>

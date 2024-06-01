@@ -5,6 +5,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 // images & icons
 import logo from "@/public/images/vscode_white.svg";
+import PostAddIcon from "@mui/icons-material/PostAdd";
+import CodeIcon from "@mui/icons-material/Code";
 // constants
 import { path } from "@/lib/templates/paths";
 import Link from "next/link";
@@ -28,10 +30,10 @@ const NavBar = (): ReactNode => {
       />
       <ul className="p-2 w-full h-[95%]">
         <Link href={mainPath} className={li_className}>
-          File
+          <CodeIcon />
         </Link>
         <Link href={addPostPath} className={li_className}>
-          작성하기
+          <PostAddIcon />
         </Link>
       </ul>
     </div>

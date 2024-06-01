@@ -1,14 +1,24 @@
 "use client";
-import { addPost } from "@/lib/firebase/firebaseCRUD";
-import React, { FormEvent, ReactNode, useEffect, useState } from "react";
+import React, {
+  FormEvent,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+// Icons & Images
 // Type
 import { postType, initPost } from "@/lib/templates/post";
+import SubmitBtn from "./UI/SubmitBtn";
 
 const PostEditor = (): ReactNode => {
   const title = "nextjs post2";
   // State
-  const [postContent, setPostContent] = useState<postType>(initPost);
+  const [post, setPost] = useState<postType>(initPost);
   const [maxLineNumber, setMaxLineNumber] = useState<number>(1);
+  const lineNumberRef = useRef<HTMLTextAreaElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
   };
@@ -20,7 +30,7 @@ const PostEditor = (): ReactNode => {
 
   // 제목 넘겨받는거 수정 필요
   useEffect(() => {
-    setPostContent((prev) => ({
+    setPost((prev) => ({
       ...prev,
       title: title,
       // folder 임시
@@ -30,42 +40,63 @@ const PostEditor = (): ReactNode => {
   // functions
   const handleContentChange = (contents: string) => {
     setMaxLineNumber(contents.split("\n").length);
-    setPostContent((prev) => ({
+    if (contents)
+      setPost((prev) => ({
+        ...prev,
+        contents,
+      }));
+  };
+  const handleTitleChange = (title: string) => {
+    setPost((prev) => ({
       ...prev,
-      contents,
+      title,
     }));
   };
 
-  const handleAddPost = (post: postType) => {
-    addPost(post);
-    alert("글 등록됨");
-  };
+  // Sync scroll positions
+  useEffect(() => {
+    const syncScroll = () => {
+      if (lineNumberRef.current && contentRef.current) {
+        lineNumberRef.current.scrollTop = contentRef.current.scrollTop;
+      }
+    };
+
+    const contentElement = contentRef.current;
+    if (contentElement) {
+      contentElement.addEventListener("scroll", syncScroll);
+      return () => contentElement.removeEventListener("scroll", syncScroll);
+    }
+  }, []);
+
   return (
     <form
-      className="w-full mt-9 h-full flex justify-start items-center"
+      className="w-[80vw] h-screen flex flex-col justify-start items-center text-white"
       onSubmit={handleSubmit}
     >
-      {/* 제목은 만들때 생성됨 */}
+      {/* 제목 */}
+      <textarea
+        className="outline-none w-full h-[10vh] bg-post p-4 text-2xl"
+        placeholder="Title"
+        onChange={(e) => handleTitleChange(e.target.value)}
+      ></textarea>
       {/* 줄번호 */}
-      <textarea
-        readOnly
-        className="flex flex-col justify-start text-end w-12 h-full leading-relaxed outline-none bg-post pr-4"
-        value={lineContent}
-      />
-      {/* 글쓰기 */}
-      <textarea
-        className="bg-post outline-none w-full h-full leading-relaxed"
-        value={postContent.contents}
-        onChange={(e) => handleContentChange(e.target.value)}
-        required
-      />
-      <button
-        className="absolute border-white border-1 border-solid"
-        // type="submit"
-        onClick={() => handleAddPost(postContent)}
-      >
-        글 등록하기
-      </button>
+      <div className="flex w-full h-full">
+        <textarea
+          ref={lineNumberRef}
+          readOnly
+          className="text-end w-16 h-full leading-relaxed outline-none bg-post pr-4 scrollbar-hide overflow-auto"
+          value={lineContent}
+        />
+        {/* 글쓰기 */}
+        <textarea
+          ref={contentRef}
+          className="outline-none w-full h-full leading-relaxed bg-post scrollbar-hide overflow-y-auto"
+          value={post.contents}
+          onChange={(e) => handleContentChange(e.target.value)}
+          required
+        />
+      </div>
+      <SubmitBtn post={post} />
     </form>
   );
 };

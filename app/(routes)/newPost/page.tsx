@@ -1,9 +1,8 @@
-import React, { ReactNode } from 'react'
-
+import React, { ReactNode } from "react";
+// Components
+import PostEditor from "@/app/components/PostEditor";
 const page = (): ReactNode => {
-  return (
-    <div>Write Page</div>
-  )
-}
+  return <PostEditor />;
+};
 
-export default page
+export default page;

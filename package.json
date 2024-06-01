@@ -1,7 +1,7 @@
 {
   "name": "vsc-blog",
   "version": "0.1.0",
-  "private": true,  
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,7 +14,8 @@
     "@mdx-js/loader": "^3.0.1",
     "@mdx-js/mdx": "^3.0.1",
     "@mdx-js/react": "^3.0.1",
-    "@mui/icons-material": "^5.15.18",
+    "@mui/icons-material": "^5.15.19",
+    "@mui/material": "^5.15.19",
     "@mui/system": "^5.15.15",
     "@next/mdx": "^14.2.3",
     "@nextui-org/react": "^2.3.6",
@@ -28,6 +29,7 @@
     "react-dom": "^18",
     "remark-gfm": "^4.0.0",
     "remark-rehype": "^11.1.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
