@@ -21,10 +21,12 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
   console.log(postContent);
 
   return (
-    <Suspense fallback={<>Loading...</>}>
+    <>
       <Tab posts={posts as postType[]} />
-      <MDXRemoteProvider source={postContent} />
-    </Suspense>
+      <Suspense fallback={<>Loading Post...</>}>
+        <MDXRemoteProvider source={postContent} />
+      </Suspense>
+    </>
   );
 };
 

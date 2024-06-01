@@ -20,6 +20,7 @@ const config: Config = {
         navbar: "#333333",
         postlist: "#1E201F",
         post: "#252526",
+        tabCloseHover: "#898A8B",
       },
     },
   },

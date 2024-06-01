@@ -1,5 +1,7 @@
 "use client";
 import React, { ReactNode, useEffect } from "react";
+// Images & icons
+import CloseIcon from "@mui/icons-material/Close";
 // Context
 import usePostStore from "@/lib/context/postStore";
 import useTabStore from "@/lib/context/tabStore";
@@ -21,29 +23,27 @@ const Tab = ({ posts }: TabProps): ReactNode => {
     setPostState(posts);
   }, []);
 
-  // Style
-  //style
-  const tab_style =
-    "bg-navbar w-fit h-full p-2 hover:bg-white hover:text-black cursor-pointer pr-4";
   const tabs = tabState.map((tab) => {
     return (
       <li
         key={tab.id}
         onClick={() => router.push(`/posts/${tab.id}`)}
-        className={tab_style}
+        className={
+          "flex justify-end items-center bg-navbar w-fit h-full p-2 hover:bg-white hover:text-black cursor-pointer"
+        }
       >
         {tab.title}
         <button
           onClick={() => setTabState("close", tab)}
-          className="hover:bg-slate-800"
+          className="ml-1 hover:bg-tabCloseHover rounded-md  "
         >
-          닫기
+          <CloseIcon />
         </button>
       </li>
     );
   });
   return (
-    <ul className="relative w-full h-9 bg-post flex justify-start items-center">
+    <ul className="relative w-full h-9 bg-post flex justify-start items-center overflow-x-auto">
       {tabs}
     </ul>
   );
