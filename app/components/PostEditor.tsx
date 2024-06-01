@@ -9,13 +9,16 @@ import React, {
 // Icons & Images
 // Type
 import { postType, initPost } from "@/lib/templates/post";
-import SubmitBtn from "./UI/SubmitBtn";
+import AddPostBtn from "./UI/AddPostBtn";
+import useFocusStore from "@/lib/context/focusStore";
 
 const PostEditor = (): ReactNode => {
-  const title = "nextjs post2";
   // State
-  const [post, setPost] = useState<postType>(initPost);
+  const { foucsedSupFolderID } = useFocusStore();
+
+  const [newPost, setNewPost] = useState<postType>(initPost);
   const [maxLineNumber, setMaxLineNumber] = useState<number>(1);
+  // Ref
   const lineNumberRef = useRef<HTMLTextAreaElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
@@ -28,26 +31,24 @@ const PostEditor = (): ReactNode => {
     lineContent += i + "\n";
   }
 
-  // 제목 넘겨받는거 수정 필요
   useEffect(() => {
-    setPost((prev) => ({
+    setNewPost((prev) => ({
       ...prev,
-      title: title,
       // folder 임시
-      folderName: "nextjs",
+      folderID: foucsedSupFolderID,
     }));
   }, []);
   // functions
   const handleContentChange = (contents: string) => {
     setMaxLineNumber(contents.split("\n").length);
     if (contents)
-      setPost((prev) => ({
+      setNewPost((prev) => ({
         ...prev,
         contents,
       }));
   };
   const handleTitleChange = (title: string) => {
-    setPost((prev) => ({
+    setNewPost((prev) => ({
       ...prev,
       title,
     }));
@@ -91,12 +92,12 @@ const PostEditor = (): ReactNode => {
         <textarea
           ref={contentRef}
           className="outline-none w-full h-full leading-relaxed bg-post scrollbar-hide overflow-y-auto"
-          value={post.contents}
+          value={newPost.contents}
           onChange={(e) => handleContentChange(e.target.value)}
           required
         />
       </div>
-      <SubmitBtn post={post} />
+      <AddPostBtn newPost={newPost} />
     </form>
   );
 };

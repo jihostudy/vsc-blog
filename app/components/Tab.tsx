@@ -1,26 +1,35 @@
 "use client";
 import React, { ReactNode, useEffect } from "react";
+import { useRouter } from "next/navigation";
 // Images & icons
 import CloseIcon from "@mui/icons-material/Close";
 // Context
 import usePostStore from "@/lib/context/postStore";
 import useTabStore from "@/lib/context/tabStore";
-import { useRouter } from "next/navigation";
+import useFolderState from "@/lib/context/folderStore";
 // Type
 import { postType } from "@/lib/templates/post";
+import { clientFolderType, folderType } from "@/lib/templates/folder";
 
 interface TabProps {
   posts: postType[];
+  folders: folderType[];
 }
 
-const Tab = ({ posts }: TabProps): ReactNode => {
+const Tab = ({ posts, folders }: TabProps): ReactNode => {
   const router = useRouter();
   // States
   const { postState, setPostState } = usePostStore();
+  const { folderState, setFolderState } = useFolderState();
+
   const { tabState, setTabState } = useTabStore();
   useEffect(() => {
-    console.log("tab에서 post update: ", posts);
     setPostState(posts);
+    const clientFolderState: clientFolderType[] = folders.map((prev) => ({
+      ...prev,
+      isOpen: false,
+    }));
+    setFolderState(clientFolderState);
   }, []);
 
   const tabs = tabState.map((tab) => {

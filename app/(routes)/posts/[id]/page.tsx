@@ -4,16 +4,17 @@ import MDXRemoteProvider from "@/lib/providers/MDXRemoteProvider";
 // Components
 import Tab from "@/app/components/Tab";
 // Firebase
-import { getAllPosts } from "@/lib/firebase/firebaseCRUD";
+import { getAllFolders, getAllPosts } from "@/lib/firebase/firebaseCRUD";
+// Type
 import { postType } from "@/lib/templates/post";
+import { folderType } from "@/lib/templates/folder";
 
 interface PostPageProps {
   params: { id: string };
 }
 const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
   const posts: postType[] = await getAllPosts();
-  console.log("Fetched from Posts", posts);
-  console.log("params", params);
+  const folders: folderType[] = await getAllFolders();
 
   const postContent: string | undefined = posts.find(
     (post) => post.id === params.id
@@ -22,7 +23,7 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
 
   return (
     <>
-      <Tab posts={posts as postType[]} />
+      <Tab posts={posts as postType[]} folders={folders as folderType[]} />
       <Suspense fallback={<>Loading Post...</>}>
         <MDXRemoteProvider source={postContent} />
       </Suspense>

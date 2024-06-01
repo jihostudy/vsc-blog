@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html className="relative" lang="en">
       <body
-        className={`${inter.className} flex flex-row justify-start w-full overflow-x-hidden relative`}
+        className={`${inter.className} flex flex-row w-screen overflow-x-hidden relative`}
       >
         <NavBar />
         <PostList />

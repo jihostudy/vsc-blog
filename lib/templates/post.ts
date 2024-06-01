@@ -4,14 +4,14 @@ export interface postType {
   timeStamp: Date;
   title: string;
   viewCount: number;
-  folderName: string;
+  folderID: string;
 }
 
-export const initPost = {
+export const initPost: postType = {
   id: "", // 파베 받은 data
   contents: "",
   timeStamp: new Date(),
   title: "",
   viewCount: 0,
-  folderName: "",
+  folderID: "",
 };

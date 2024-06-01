@@ -12,9 +12,10 @@ import Modal from "@mui/material/Modal";
 import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
+import delayTimeout from "@/lib/functions/asyncTimeout";
 
 interface SubmitBtnProps {
-  post: postType;
+  newPost: postType;
 }
 
 const style = {
@@ -35,7 +36,7 @@ const style = {
   borderRadius: "1rem",
 };
 
-const SubmitBtn = ({ post }: SubmitBtnProps): ReactNode => {
+const AddPostBtn = ({ newPost }: SubmitBtnProps): ReactNode => {
   const router = useRouter();
   // States
   const [open, setOpen] = useState<boolean>(false);
@@ -44,35 +45,24 @@ const SubmitBtn = ({ post }: SubmitBtnProps): ReactNode => {
   const handleClose = () => setOpen(false);
 
   //functions
-  const handleAddPost = (post: postType) => {
-    addPost(post);
-    alert("글 등록됨");
-  };
-
   // Submit
   const submitHandler = async (isImp: boolean): Promise<undefined> => {
     try {
       const data: postType = {
-        ...post,
+        ...newPost,
         timeStamp: new Date(), // 현재 시간
       };
       setIsSaving(true);
-      addPost(post);
+      addPost(newPost);
 
       // customRevalidateTag("notice");
-      // await delayTimeout(4000);
+      await delayTimeout(1000);
       // const nextPath: Path = "/notification?page=1"; // 해당 글로 이동
       router.push("/");
     } catch (error) {
       console.log("Error Occured on Submitting!", error);
     }
   };
-  // <div
-  //     className="fixed bottom-4 right-4 text-white cursor-pointer"
-  //     onClick={() => handleAddPost(postContent)}
-  //   >
-  //     SubmitBtn
-  //   </div>
   return (
     <>
       <Button
@@ -126,4 +116,4 @@ const SubmitBtn = ({ post }: SubmitBtnProps): ReactNode => {
   );
 };
 
-export default SubmitBtn;
+export default AddPostBtn;

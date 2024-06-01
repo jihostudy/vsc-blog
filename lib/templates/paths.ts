@@ -1,1 +1,1 @@
-export type path = "/" | "/newPost";
+export type path = "/" | "/newPost" | "posts/[id]";
