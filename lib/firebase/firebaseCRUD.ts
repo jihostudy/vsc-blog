@@ -34,7 +34,7 @@ export const addPost = async (post: postType) => {
 };
 
 // Read
-export const getAllPosts = async (): Promise<postType[] | null> => {
+export const getAllPosts = async (): Promise<postType[]> => {
   try {
     const res = await getDocs(getCollection("posts"));
     const dataList: postType[] = res.docs.map((doc) => {

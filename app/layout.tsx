@@ -24,15 +24,13 @@ export default function RootLayout({
 }>) {
   return (
     <html className="relative" lang="en">
-      <NextUIProviders>
-        <body
-          className={`${inter.className} flex flex-row justify-start w-full overflow-x-hidden relative`}
-        >
-          <NavBar />
-          <PostList />
-          {children}
-        </body>
-      </NextUIProviders>
+      <body
+        className={`${inter.className} flex flex-row justify-start w-full overflow-x-hidden relative`}
+      >
+        <NavBar />
+        <PostList />
+        {children}
+      </body>
     </html>
   );
 }

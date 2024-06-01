@@ -1,6 +1,4 @@
 // Types
-import { tabType } from "@/lib/templates/tab";
-import { postType } from "@/lib/templates/post";
 // MDX
 import { MDXRemote } from "next-mdx-remote/rsc";
 

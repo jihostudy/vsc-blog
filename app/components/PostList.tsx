@@ -30,6 +30,7 @@ const PostList = (): ReactNode => {
   // States
   const [focusFolder, setFocusFolder] = useState<string | null>(null); // 파일 생성 위치 판단 위해
   const { postState } = usePostStore();
+  console.log(postState);
   const { tabState, setTabState } = useTabStore();
   // function
   const toggleFolder = (folderName: string) => {
@@ -52,8 +53,6 @@ const PostList = (): ReactNode => {
 
   // Data
   const folder_list = dummyFolderList.map((folder) => {
-    console.log(postState);
-
     const files: postType[] | undefined = postState?.filter(
       (post) => post.folderName === folder.folderName
     );
@@ -70,7 +69,7 @@ const PostList = (): ReactNode => {
       </Link>
     ));
     return (
-      <>
+      <React.Fragment key={folder.folderName}>
         <div
           className="hover:bg-[#37373D] cursor-pointer"
           onClick={() => {
@@ -88,7 +87,7 @@ const PostList = (): ReactNode => {
           {folder.folderName}
         </div>
         {folder.isOpen && <ul className="flex flex-col">{displayFiles}</ul>}
-      </>
+      </React.Fragment>
     );
   });
 
