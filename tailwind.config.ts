@@ -9,6 +9,22 @@ const config: Config = {
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     "./mdx-components.tsx",
   ],
+  safelist: [
+    "pl-0",
+    "pl-1",
+    "pl-2",
+    "pl-3",
+    "pl-4",
+    "pl-5",
+    "pl-6",
+    "pl-7",
+    "pl-8",
+    "pl-9",
+    "pl-10",
+    "pl-12",
+    "pl-16",
+    "pl-20",
+  ],
   theme: {
     extend: {
       backgroundImage: {

@@ -11,9 +11,18 @@ import React, {
 import { postType, initPost } from "@/lib/templates/post";
 import AddPostBtn from "./UI/AddPostBtn";
 import useFocusStore from "@/lib/context/focusStore";
+import { clientFolderType, folderType } from "@/lib/templates/folder";
+import usePostStore from "@/lib/context/postStore";
+import useFolderState from "@/lib/context/folderStore";
 
-const PostEditor = (): ReactNode => {
+interface PostEditorProps {
+  posts: postType[];
+  folders: folderType[];
+}
+const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
   // State
+  const { postState, setPostState } = usePostStore();
+  const { folderState, setFolderState } = useFolderState();
   const { foucsedSupFolderID } = useFocusStore();
 
   const [newPost, setNewPost] = useState<postType>(initPost);
@@ -32,9 +41,16 @@ const PostEditor = (): ReactNode => {
   }
 
   useEffect(() => {
+    setPostState(posts);
+    const clientFolderState: clientFolderType[] = folders.map((prev) => ({
+      ...prev,
+      isOpen: false,
+    }));
+    setFolderState(clientFolderState);
+
+    // 초기설정
     setNewPost((prev) => ({
       ...prev,
-      // folder 임시
       folderID: foucsedSupFolderID,
     }));
   }, []);

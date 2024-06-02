@@ -25,7 +25,6 @@ interface ClientFolderType extends folderType {
 }
 
 const PostList = (): ReactNode => {
-  const FileLevel = 1;
   // ref
   const postListRef = useRef<HTMLDivElement>(null);
   const folderContainerRef = useRef<HTMLDivElement>(null);
@@ -63,12 +62,15 @@ const PostList = (): ReactNode => {
 
   const getFileList = (
     folderInput: ClientFolderType,
-    fileInput: postType[]
+    fileInput: postType[],
+    Level: number
   ): React.JSX.Element[] => {
     const files: postType[] | undefined = fileInput?.filter(
       (post) => post.folderID === folderInput.id
     );
+    const paddingLeft = `pl-${4 * Level}`;
 
+    const style = `${paddingLeft} flex items-center py-1.5 hover:bg-[#37373D] cursor-pointer truncate`;
     const fileList = files?.map((file) => (
       <Link
         href={`/posts/${file.id}`}
@@ -77,7 +79,7 @@ const PostList = (): ReactNode => {
           setTabState("open", file);
         }}
         key={file.id}
-        className="flex items-center pl-5 py-1.5 hover:bg-[#37373D] cursor-pointer"
+        className={style}
       >
         {file.title}
       </Link>
@@ -86,20 +88,19 @@ const PostList = (): ReactNode => {
   };
 
   const getFolderList = (
-    folderInput: clientFolderType
+    folderInput: clientFolderType,
+    Level: number
   ): React.JSX.Element[] => {
     // 폴더들
 
     const folders: clientFolderType[] = folderState?.filter(
       (folder) => folder.supFolderID == folderInput.id
     );
-
+    const paddingLeft = `pl-${Level}`;
+    const style = `${paddingLeft} w-full hover:bg-[#37373D] cursor-pointer truncate`;
     const folderList = folders?.map((folder) => (
       <React.Fragment key={folder.folderName}>
-        <div
-          className="w-full hover:bg-[#37373D] cursor-pointer"
-          onClick={() => toggleFolder(folder)}
-        >
+        <div className={style} onClick={() => toggleFolder(folder)}>
           {folder.isOpen ? (
             <ExpandMoreIcon />
           ) : (
@@ -109,7 +110,7 @@ const PostList = (): ReactNode => {
           {folder.folderName}
         </div>
         {folder.isOpen && (
-          <ul className="flex flex-col">{getDataList(folder)}</ul>
+          <ul className="flex flex-col">{getDataList(folder, Level + 1)}</ul>
         )}
       </React.Fragment>
     ));
@@ -117,35 +118,13 @@ const PostList = (): ReactNode => {
   };
 
   // Data
-  const getDataList = (folderInput: clientFolderType) => {
-    // for (let i = 0; i < folderState.length; i++) {
-    //   if (folderInput.id === folderState[i].supFolderID) {
-    //     console.log("같음");
-    //   } else {
-    //     console.log("다른");
-    //   }
-    // }
-
-    // const datas: clientFolderType[] = folderState.filter(
-    //   (data) => (data.supFolderID = folderInput.id)
-    // );
-    // console.log("getDataList");
-    // console.log(datas);
+  const getDataList = (folderInput: clientFolderType, Level: number) => {
     return (
       <>
-        {getFolderList(folderInput)}
-        {getFileList(folderInput, postState)}
+        {getFolderList(folderInput, Level)}
+        {getFileList(folderInput, postState, Level)}
       </>
     );
-    // const dataList: React.JSX.Element[] = folderState.map((folder) => {
-    //   return (
-    //     <>
-    //       {getFolderList(folder)}
-    //       {getFileList(folder, postState)}
-    //     </>
-    //   );
-    // });
-    // return dataList;
   };
 
   useEffect(() => {
@@ -171,10 +150,6 @@ const PostList = (): ReactNode => {
   useEffect(() => {
     console.log(foucsedSupFolderID);
   }, [foucsedSupFolderID]);
-  useEffect(() => {
-    console.log("Get data list");
-    console.log(getDataList(initClientfolder));
-  }, []);
   return (
     <div className="w-[15vw] bg-postlist h-screen text-white" ref={postListRef}>
       <div className="p-3 flex items-center justify-between">
@@ -182,7 +157,7 @@ const PostList = (): ReactNode => {
       </div>
       {/* Folder List */}
       <div ref={folderContainerRef} className="flex items-start flex-col">
-        {getDataList(initClientfolder)}
+        {getDataList(initClientfolder, 0)}
         <AddFolderBtn />
       </div>
       {/* 폴더 추가 임시 */}
