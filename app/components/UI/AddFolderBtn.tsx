@@ -2,7 +2,7 @@
 import React, { ReactNode, useState } from "react";
 import { useRouter } from "next/navigation";
 // Firebase
-import { addFolder, getAllFolders } from "@/lib/firebase/firebaseCRUD";
+import { addFolder } from "@/lib/firebase/firebaseCRUD";
 // Icons & Images
 import { TextField } from "@mui/material";
 // Types

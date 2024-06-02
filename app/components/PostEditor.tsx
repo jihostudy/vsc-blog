@@ -14,6 +14,7 @@ import useFocusStore from "@/lib/context/focusStore";
 import { clientFolderType, folderType } from "@/lib/templates/folder";
 import usePostStore from "@/lib/context/postStore";
 import useFolderState from "@/lib/context/folderStore";
+import SelectFolderBtn from "./SelectFolderBtn";
 
 interface PostEditorProps {
   posts: postType[];
@@ -42,10 +43,17 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
 
   useEffect(() => {
     setPostState(posts);
-    const clientFolderState: clientFolderType[] = folders.map((prev) => ({
-      ...prev,
-      isOpen: false,
-    }));
+    const clientFolderState: clientFolderType[] = folders.map((folder) => {
+      const wasItOpen: boolean = folderState.find(
+        (provFolder) => provFolder.id === folder.id
+      )
+        ? true
+        : false;
+      return {
+        ...folder,
+        isOpen: wasItOpen,
+      };
+    });
     setFolderState(clientFolderState);
 
     // 초기설정
@@ -55,7 +63,7 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
     }));
   }, []);
   // functions
-  const handleContentChange = (contents: string) => {
+  const handleContentChange = (contents: string): void => {
     setMaxLineNumber(contents.split("\n").length);
     if (contents)
       setNewPost((prev) => ({
@@ -63,13 +71,18 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
         contents,
       }));
   };
-  const handleTitleChange = (title: string) => {
+  const handleTitleChange = (title: string): void => {
     setNewPost((prev) => ({
       ...prev,
       title,
     }));
   };
-
+  const handleFolderChange = (folderID: string): void => {
+    setNewPost((prev) => ({
+      ...prev,
+      folderID,
+    }));
+  };
   // Sync scroll positions
   useEffect(() => {
     const syncScroll = () => {
@@ -90,12 +103,18 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
       className="w-[80vw] h-screen flex flex-col justify-start items-center text-white"
       onSubmit={handleSubmit}
     >
-      {/* 제목 */}
-      <textarea
-        className="outline-none w-full h-[10vh] bg-post p-4 text-2xl"
-        placeholder="Title"
-        onChange={(e) => handleTitleChange(e.target.value)}
-      ></textarea>
+      <div className="flex justify-start items-center w-full h-[10vh] ">
+        {/* 제목 */}
+        <textarea
+          className="outline-none w-4/5 h-full bg-post p-4 text-2xl"
+          placeholder="Title"
+          onChange={(e) => handleTitleChange(e.target.value)}
+        />
+        <SelectFolderBtn
+          newPost={newPost}
+          handleFolderChange={handleFolderChange}
+        />
+      </div>
       {/* 줄번호 */}
       <div className="flex w-full h-full">
         <textarea
@@ -110,7 +129,6 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
           className="outline-none w-full h-full leading-relaxed bg-post scrollbar-hide overflow-y-auto"
           value={newPost.contents}
           onChange={(e) => handleContentChange(e.target.value)}
-          required
         />
       </div>
       <AddPostBtn newPost={newPost} />

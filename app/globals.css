@@ -131,3 +131,9 @@ table {
 textarea {
   resize: none;
 }
+
+.wavy-hr {
+  border: none;
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='10' viewBox='0 0 100 10'%3E%3Cpath d='M 0 5 C 25 0 75 10 100 5' stroke='%23ffffff' fill='transparent'/%3E%3C/svg%3E");
+}

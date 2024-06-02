@@ -1,10 +1,20 @@
 /newpost 에서 data fetching 하기 (완료)
 padding 먹히게 하기 다시 하기 (완료)
 
-이후, 마지막 선택한 폴더 / 파일 hightlight (진행중)
+- 마지막 선택한 폴더 / 파일 hightlight (완료)
 
-이후, Editor 꾸미기
-이후, totalView / 읽는 시간 표시
-이후, 댓글 기능
+- Editor 꾸미기, 글쓰기시 폴더 선택 
+- totalView / 읽는 시간 표시
+- 댓글 기능
 
-끝.
+<글쓰기>
+- Folder 선택 드롭다운
+
+
+
+<부가>
+Add Folder 숨겨두었다가 누르면 입력창 나오게끔.
+
+<홈>
+- 소개글
+- Recent posts

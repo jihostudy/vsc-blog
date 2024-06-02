@@ -24,6 +24,12 @@ const config: Config = {
     "pl-12",
     "pl-16",
     "pl-20",
+    "w-full",
+    "text-4xl",
+    "text-3xl",
+    "text-2xl",
+    "my-4",
+    "px-10",
   ],
   theme: {
     extend: {
@@ -35,6 +41,8 @@ const config: Config = {
       backgroundColor: {
         navbar: "#333333",
         postlist: "#1E201F",
+        postlistHover: "#2A2D2E",
+        postlistFocused: "#04395E",
         post: "#252526",
         tabCloseHover: "#898A8B",
       },

@@ -53,7 +53,7 @@ const AddPostBtn = ({ newPost }: SubmitBtnProps): ReactNode => {
         timeStamp: new Date(), // 현재 시간
       };
       setIsSaving(true);
-      addPost(newPost);
+      addPost(data);
 
       // customRevalidateTag("notice");
       await delayTimeout(1000);

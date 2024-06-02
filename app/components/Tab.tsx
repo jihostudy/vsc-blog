@@ -25,10 +25,17 @@ const Tab = ({ posts, folders }: TabProps): ReactNode => {
   const { tabState, setTabState } = useTabStore();
   useEffect(() => {
     setPostState(posts);
-    const clientFolderState: clientFolderType[] = folders.map((prev) => ({
-      ...prev,
-      isOpen: false,
-    }));
+    const clientFolderState: clientFolderType[] = folders.map((folder) => {
+      const wasItOpen: boolean = folderState.find(
+        (provFolder) => provFolder.id === folder.id
+      )
+        ? true
+        : false;
+      return {
+        ...folder,
+        isOpen: wasItOpen,
+      };
+    });
     setFolderState(clientFolderState);
   }, []);
 

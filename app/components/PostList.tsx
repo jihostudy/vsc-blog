@@ -31,8 +31,14 @@ const PostList = (): ReactNode => {
   // States
   const { postState } = usePostStore();
   const { tabState, setTabState } = useTabStore();
-  const { foucsedSupFolderID, setFoucsedSupFolderIDState } = useFocusStore();
+  const {
+    focusedID,
+    setFocusedIDState,
+    foucsedSupFolderID,
+    setFoucsedSupFolderIDState,
+  } = useFocusStore();
   const { folderState, setFolderState } = useFolderState();
+
   // Functions
   const toggleFolder = (toggledFolder: ClientFolderType) => {
     const index = folderState.findIndex(
@@ -51,6 +57,7 @@ const PostList = (): ReactNode => {
       setFolderState(newFolderList);
     }
     setFoucsedSupFolderIDState(toggledFolder.id); // 자신의 id
+    setFocusedIDState(toggledFolder.id);
   };
   const toggleFile = (toggledFile: postType) => {
     // 부모 folder id
@@ -58,6 +65,8 @@ const PostList = (): ReactNode => {
       folder.id === toggledFile.folderID;
     })?.id;
     setFoucsedSupFolderIDState(targetFolderID as string);
+    setFocusedIDState(toggledFile.id);
+    setTabState("open", toggledFile);
   };
 
   const getFileList = (
@@ -70,16 +79,14 @@ const PostList = (): ReactNode => {
     );
     const paddingLeft = `pl-${4 * Level}`;
 
-    const style = `${paddingLeft} flex items-center py-1.5 hover:bg-[#37373D] cursor-pointer truncate`;
+    const style = `${paddingLeft} flex items-center h-8 py-1.5 hover:bg-postlistHover cursor-pointer truncate box-border w-full`;
+    const focusedStyle = `${paddingLeft} flex items-center h-8 py-1.5 bg-postlistFocused border-[#007FD4] border-1 border-solid  cursor-pointer truncate box-border w-full`;
     const fileList = files?.map((file) => (
       <Link
         href={`/posts/${file.id}`}
-        onClick={() => {
-          toggleFile(file);
-          setTabState("open", file);
-        }}
+        onClick={() => toggleFile(file)}
         key={file.id}
-        className={style}
+        className={file.id === focusedID ? focusedStyle : style}
       >
         {file.title}
       </Link>
@@ -97,10 +104,15 @@ const PostList = (): ReactNode => {
       (folder) => folder.supFolderID == folderInput.id
     );
     const paddingLeft = `pl-${Level}`;
-    const style = `${paddingLeft} w-full hover:bg-[#37373D] cursor-pointer truncate`;
-    const folderList = folders?.map((folder) => (
+    const style = `${paddingLeft} w-full h-8 hover:bg-postlistHover cursor-pointer truncate box-border flex items-center`;
+    const focusedStyle = `${paddingLeft} w-full h-8 bg-postlistFocused border-[#007FD4] cursor-pointer truncate box-border flex items-center`;
+
+    const folderList = folders?.map((folder: clientFolderType) => (
       <React.Fragment key={folder.folderName}>
-        <div className={style} onClick={() => toggleFolder(folder)}>
+        <div
+          className={folder.id === focusedID ? focusedStyle : style}
+          onClick={() => toggleFolder(folder)}
+        >
           {folder.isOpen ? (
             <ExpandMoreIcon />
           ) : (
@@ -110,7 +122,9 @@ const PostList = (): ReactNode => {
           {folder.folderName}
         </div>
         {folder.isOpen && (
-          <ul className="flex flex-col">{getDataList(folder, Level + 1)}</ul>
+          <ul className="flex flex-col w-full">
+            {getDataList(folder, Level + 1)}
+          </ul>
         )}
       </React.Fragment>
     ));
@@ -156,15 +170,13 @@ const PostList = (): ReactNode => {
         Source Control
       </div>
       {/* Folder List */}
-      <div ref={folderContainerRef} className="flex items-start flex-col">
+      <div
+        ref={folderContainerRef}
+        className="flex items-start flex-col w-full"
+      >
         {getDataList(initClientfolder, 0)}
         <AddFolderBtn />
       </div>
-      {/* 폴더 추가 임시 */}
-
-      {/* <button className="text-white text-xl flex justify-center items-center mt-10 w-full hover:bg-white hover:text-black font-bold">
-        폴더 추가하기
-      </button> */}
     </div>
   );
 };
