@@ -6,6 +6,7 @@ import {
   doc,
   documentId,
   getDocs,
+  increment,
   updateDoc,
 } from "firebase/firestore";
 // type
@@ -98,5 +99,13 @@ export const getAllFolders = async (): Promise<folderType[]> => {
 };
 
 // Update
-
+export const updateViewCount = async (postID: string) => {
+  try {
+    await updateDoc(doc(db, "posts", postID), {
+      viewCount: increment(1),
+    });
+  } catch (error) {
+    console.log("Error updating view Count", error);
+  }
+};
 // Delete

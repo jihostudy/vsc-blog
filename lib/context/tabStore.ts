@@ -20,16 +20,6 @@ const useTabStore = create<tabState>((set) => ({
         );
         // Tab 추가
         if (check_existence === -1) {
-          // // 새로운 Tab
-          // const newClickedTab: tabType = {
-          //   ...clickedTab,
-          //   display: true,
-          // };
-          // // 기존 Tab
-          // let newTabList: tabType[] = tabList.map((tab) => ({
-          //   ...tab,
-          //   display: false,
-          // }));
           const newTabList = [...tabList, clickedTab];
 
           return { tabState: newTabList };

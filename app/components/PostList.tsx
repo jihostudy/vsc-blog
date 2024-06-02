@@ -19,6 +19,7 @@ import {
   initClientfolder,
 } from "@/lib/templates/folder";
 import AddFolderBtn from "./UI/AddFolderBtn";
+import { updateViewCount } from "@/lib/firebase/firebaseCRUD";
 
 interface ClientFolderType extends folderType {
   isOpen: boolean; // DB에 저장할 필요 없음
@@ -61,12 +62,18 @@ const PostList = (): ReactNode => {
   };
   const toggleFile = (toggledFile: postType) => {
     // 부모 folder id
-    const targetFolderID: string | undefined = folderState.find((folder) => {
-      folder.id === toggledFile.folderID;
-    })?.id;
-    setFoucsedSupFolderIDState(targetFolderID as string);
+    const targetFolder: clientFolderType | undefined = folderState.find(
+      (folder) => {
+        folder.id === toggledFile.folderID;
+      }
+    );
+    if (!targetFolder) {
+      throw new Error(`Never Error Occrurs`);
+    }
+    setFoucsedSupFolderIDState(targetFolder.id as string);
     setFocusedIDState(toggledFile.id);
     setTabState("open", toggledFile);
+    updateViewCount(toggledFile.id);
   };
 
   const getFileList = (
