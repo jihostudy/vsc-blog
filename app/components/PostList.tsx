@@ -60,6 +60,7 @@ const PostList = (): ReactNode => {
     setFoucsedSupFolderIDState(toggledFolder.id); // 자신의 id
     setFocusedIDState(toggledFolder.id);
   };
+
   const toggleFile = (toggledFile: postType) => {
     // 부모 folder id
     const targetFolder: clientFolderType | undefined = folderState.find(
@@ -172,7 +173,7 @@ const PostList = (): ReactNode => {
     console.log(foucsedSupFolderID);
   }, [foucsedSupFolderID]);
   return (
-    <div className="w-[15vw] bg-postlist h-screen text-white" ref={postListRef}>
+    <div className="w-[12vw] bg-postlist h-screen text-white" ref={postListRef}>
       <div className="p-3 flex items-center justify-between">
         Source Control
       </div>

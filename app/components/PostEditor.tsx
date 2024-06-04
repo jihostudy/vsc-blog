@@ -100,7 +100,7 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
 
   return (
     <form
-      className="w-[80vw] h-screen flex flex-col justify-start items-center text-white"
+      className="w-[85vw] h-screen flex flex-col justify-start items-center text-white"
       onSubmit={handleSubmit}
     >
       <div className="flex justify-start items-center w-full h-[10vh] ">

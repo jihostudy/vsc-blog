@@ -14,7 +14,7 @@ const Home = async (): Promise<ReactNode> => {
   const folders = await getAllFolders();
   return (
     <NextUIProviders>
-      <main className="relative h-screen w-[80vw] flex justify-start items-center">
+      <main className="relative h-screen w-[85vw] flex justify-start items-center">
         {/* 최초 화면 */}
         <Greetings
           posts={posts as postType[]}

@@ -1,12 +1,12 @@
 "use client";
-import React, { ReactNode } from "react";
-// next
+import React, { ReactNode, useEffect } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 // images & icons
 import logo from "@/public/images/vscode_white.svg";
-import PostAddIcon from "@mui/icons-material/PostAdd";
-import CodeIcon from "@mui/icons-material/Code";
+import SourceCodeIcon from "@/public/icons/source_control.png";
+import AddPostIcon from "@/public/icons/add_post.png";
+
 // constants
 import { path } from "@/lib/templates/paths";
 import Link from "next/link";
@@ -14,28 +14,57 @@ import Link from "next/link";
 const NavBar = (): ReactNode => {
   // next
   const router = useRouter();
+  const pathname = usePathname();
+  if (pathname === "") {
+    console.log("Home");
+  } else if (pathname === "/newPost") {
+    console.log("newPost");
+  } else if (pathname.includes("posts")) {
+    console.log("posts");
+  }
   // paths
   const mainPath: path = "/";
   const addPostPath: path = "/newPost";
   // style
   const li_className =
-    "h-[10%] flex justify-center items-center cursor-pointer";
+    "h-[6%] w-full flex justify-center items-center cursor-pointer my-4 box-content";
+  const activeClassName = "border-l-2 border-white border-solid my-4";
   return (
-    <div className="z-10 flex flex-col justify-start items-center h-screen relative bg-navbar w-[5vw] text-white">
+    <div className="z-10 flex flex-col justify-start items-center h-screen relative bg-navbar w-[3vw] text-white">
       <Link href={mainPath} className={li_className}>
         <Image
-          className="p-2 h-1/2 aspect-square"
+          className="p-2 h-4/5 aspect-square"
           src={logo}
           alt="vscode_image"
         />
       </Link>
 
-      <ul className="px-2 w-full h-[95%]">
-        <Link href={mainPath} className={li_className}>
-          <CodeIcon />
+      <ul className="px-1 w-full h-[95%] flex flex-col items-center">
+        <Link
+          href={mainPath}
+          className={`${li_className} ${
+            pathname === mainPath || pathname.includes("posts")
+              ? activeClassName
+              : ""
+          }`}
+        >
+          <Image
+            className="w-full p-2"
+            src={SourceCodeIcon}
+            alt="source_control"
+          />
         </Link>
-        <Link href={addPostPath} className={li_className}>
-          <PostAddIcon />
+        <Link
+          href={addPostPath}
+          className={`${li_className} ${
+            pathname === addPostPath ? activeClassName : ""
+          }`}
+        >
+          <Image
+            className="w-full p-2"
+            src={AddPostIcon}
+            alt="source_control"
+          />
         </Link>
       </ul>
     </div>
