@@ -3,12 +3,10 @@ export interface commentType {
   postID: string;
   contents: string;
   timeStamp: Date;
-  icon: string;
 }
 export const initComment: commentType = {
   id: "",
   postID: "",
   contents: "",
   timeStamp: new Date(),
-  icon: "laugh",
 };

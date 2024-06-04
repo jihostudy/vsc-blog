@@ -57,7 +57,7 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
           {formattedDate} | 조회수 {viewCount}
         </div>
         <MDXRemoteProvider source={content} />
-        <Terminal commentList={commentList} />
+        <Terminal post={post} commentList={commentList} />
       </Suspense>
     </>
   );
