@@ -4,7 +4,7 @@ import Link from "next/link";
 // Images & icons
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import TextField from "@mui/material/TextField";
+import FolderLogo from "@/public/icons/add_folder.png";
 
 // context
 import usePostStore from "@/lib/context/postStore";
@@ -20,6 +20,7 @@ import {
 } from "@/lib/templates/folder";
 import AddFolderBtn from "./UI/AddFolderBtn";
 import { updateViewCount } from "@/lib/firebase/firebaseCRUD";
+import Image from "next/image";
 
 interface ClientFolderType extends folderType {
   isOpen: boolean; // DB에 저장할 필요 없음
@@ -30,6 +31,7 @@ const PostList = (): ReactNode => {
   const postListRef = useRef<HTMLDivElement>(null);
   const folderContainerRef = useRef<HTMLDivElement>(null);
   // States
+  const [openNewFolderTab, setOpenNewFolderTab] = useState<boolean>(false);
   const { postState } = usePostStore();
   const { tabState, setTabState } = useTabStore();
   const {
@@ -168,10 +170,21 @@ const PostList = (): ReactNode => {
     };
   }, [setFoucsedSupFolderIDState]);
 
+  useEffect(() => {
+    console.log(openNewFolderTab);
+  }, [openNewFolderTab]);
   return (
     <div className="w-[12vw] bg-postlist h-screen text-white" ref={postListRef}>
       <div className="p-3 flex items-center justify-between">
-        Source Control
+        <span>Source Control</span>
+        <Image
+          onClick={() => {
+            setOpenNewFolderTab((prev) => !prev);
+          }}
+          className="w-[10%] aspect-square cursor-pointer"
+          src={FolderLogo}
+          alt="folder_logo"
+        />
       </div>
       {/* Folder List */}
       <div
@@ -179,7 +192,7 @@ const PostList = (): ReactNode => {
         className="flex items-start flex-col w-full"
       >
         {getDataList(initClientfolder, 0)}
-        <AddFolderBtn />
+        {openNewFolderTab ? <AddFolderBtn /> : ""}
       </div>
     </div>
   );
