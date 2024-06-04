@@ -63,15 +63,14 @@ const PostList = (): ReactNode => {
 
   const toggleFile = (toggledFile: postType) => {
     // 부모 folder id
-    const targetFolder: clientFolderType | undefined = folderState.find(
-      (folder) => {
-        folder.id === toggledFile.folderID;
-      }
-    );
-    if (!targetFolder) {
-      throw new Error(`Never Error Occrurs`);
-    }
-    setFoucsedSupFolderIDState(targetFolder.id as string);
+    console.log(toggledFile.folderID);
+    console.log(folderState);
+
+    const targetFolder: string | undefined = folderState.find((element) => {
+      element.id == toggledFile.folderID;
+    })?.id;
+
+    setFoucsedSupFolderIDState(targetFolder as string);
     setFocusedIDState(toggledFile.id);
     setTabState("open", toggledFile);
     updateViewCount(toggledFile.id);
@@ -169,9 +168,6 @@ const PostList = (): ReactNode => {
     };
   }, [setFoucsedSupFolderIDState]);
 
-  useEffect(() => {
-    console.log(foucsedSupFolderID);
-  }, [foucsedSupFolderID]);
   return (
     <div className="w-[12vw] bg-postlist h-screen text-white" ref={postListRef}>
       <div className="p-3 flex items-center justify-between">
