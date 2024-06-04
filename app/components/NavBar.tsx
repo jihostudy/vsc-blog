@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect } from "react";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 // images & icons
-import logo from "@/public/images/vscode_white.svg";
+import VSCLogo from "@/public/icons/vscode_white.svg";
 import SourceCodeIcon from "@/public/icons/source_control.png";
 import AddPostIcon from "@/public/icons/add_post.png";
 
@@ -34,7 +34,7 @@ const NavBar = (): ReactNode => {
       <Link href={mainPath} className={li_className}>
         <Image
           className="p-2 h-4/5 aspect-square"
-          src={logo}
+          src={VSCLogo}
           alt="vscode_image"
         />
       </Link>
