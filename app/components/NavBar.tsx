@@ -22,13 +22,15 @@ const NavBar = (): ReactNode => {
     "h-[10%] flex justify-center items-center cursor-pointer";
   return (
     <div className="z-10 flex flex-col justify-start items-center h-screen relative bg-navbar w-[5vw] text-white">
-      <Image
-        onClick={() => router.push(mainPath)}
-        className="p-2 h-[5%] aspect-square"
-        src={logo}
-        alt="vscode_image"
-      />
-      <ul className="p-2 w-full h-[95%]">
+      <Link href={mainPath} className={li_className}>
+        <Image
+          className="p-2 h-1/2 aspect-square"
+          src={logo}
+          alt="vscode_image"
+        />
+      </Link>
+
+      <ul className="px-2 w-full h-[95%]">
         <Link href={mainPath} className={li_className}>
           <CodeIcon />
         </Link>

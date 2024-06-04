@@ -19,7 +19,6 @@ const Home = async (): Promise<ReactNode> => {
         <Greetings
           posts={posts as postType[]}
           folders={folders as folderType[]}
-          className="w-full bg-post h-screen text-white overflow-y-hidden text-4xl"
         />
       </main>
     </NextUIProviders>

@@ -13,7 +13,7 @@ import {
 import { postType } from "../templates/post";
 import { folderType } from "../templates/folder";
 
-const getCollection = (collectionName: "posts" | "folders") =>
+const getCollection = (collectionName: "posts" | "folders" | "readme") =>
   collection(db, collectionName);
 
 // Create
@@ -108,4 +108,5 @@ export const updateViewCount = async (postID: string) => {
     console.log("Error updating view Count", error);
   }
 };
+
 // Delete

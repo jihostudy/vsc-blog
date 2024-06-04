@@ -15,11 +15,10 @@ import { clientFolderType, folderType } from "@/lib/templates/folder";
 interface PostProps {
   posts: postType[];
   folders: folderType[];
-  className: string;
 }
 
 // const PostDisplay = dynamic(() => import('@/app/components/PostDisplay'));
-const Greetings = ({ posts, folders, className }: PostProps): ReactNode => {
+const Greetings = ({ posts, folders }: PostProps): ReactNode => {
   // State
   const { postState, setPostState } = usePostStore();
   const { folderState, setFolderState } = useFolderState();
@@ -40,7 +39,11 @@ const Greetings = ({ posts, folders, className }: PostProps): ReactNode => {
     setFolderState(clientFolderState);
   }, []);
 
-  return <div className={className}>지호의 블로그에 오신것을 환영합니다</div>;
+  return (
+    <div className="p-10 w-full bg-post h-screen text-white overflow-y-hidden text-4xl">
+      <div className="border-1 border-solid border-white w-full "></div>
+    </div>
+  );
 };
 
 export default Greetings;
