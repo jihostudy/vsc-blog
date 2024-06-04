@@ -21,12 +21,15 @@ import {
 import AddFolderBtn from "./UI/AddFolderBtn";
 import { updateViewCount } from "@/lib/firebase/firebaseCRUD";
 import Image from "next/image";
+import useLoginStore from "@/lib/context/loginStore";
 
 interface ClientFolderType extends folderType {
   isOpen: boolean; // DB에 저장할 필요 없음
 }
 
 const PostList = (): ReactNode => {
+  const { loginState } = useLoginStore();
+
   // ref
   const postListRef = useRef<HTMLDivElement>(null);
   const folderContainerRef = useRef<HTMLDivElement>(null);
@@ -170,21 +173,20 @@ const PostList = (): ReactNode => {
     };
   }, [setFoucsedSupFolderIDState]);
 
-  useEffect(() => {
-    console.log(openNewFolderTab);
-  }, [openNewFolderTab]);
   return (
     <div className="w-[12vw] bg-postlist h-screen text-white" ref={postListRef}>
       <div className="p-3 flex items-center justify-between">
         <span>Source Control</span>
-        <Image
-          onClick={() => {
-            setOpenNewFolderTab((prev) => !prev);
-          }}
-          className="w-[10%] aspect-square cursor-pointer"
-          src={FolderLogo}
-          alt="folder_logo"
-        />
+        {loginState === "admin" && (
+          <Image
+            onClick={() => {
+              setOpenNewFolderTab((prev) => !prev);
+            }}
+            className="w-[10%] aspect-square cursor-pointer"
+            src={FolderLogo}
+            alt="folder_logo"
+          />
+        )}
       </div>
       {/* Folder List */}
       <div

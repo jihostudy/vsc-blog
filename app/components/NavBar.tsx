@@ -5,14 +5,16 @@ import { useRouter, usePathname } from "next/navigation";
 // images & icons
 import VSCLogo from "@/public/icons/vscode_white.svg";
 import SourceCodeIcon from "@/public/icons/source_control.png";
-import AdminIcon from "@/public/icons/admin.png";
+import AddPostIcon from "@/public/icons/add_post.png";
 
 // constants
 import { path } from "@/lib/templates/paths";
 import Link from "next/link";
 import Login from "./LoginModal";
+import useLoginStore from "@/lib/context/loginStore";
 
 const NavBar = (): ReactNode => {
+  const { loginState } = useLoginStore();
   // next
   const router = useRouter();
   const pathname = usePathname();
@@ -55,14 +57,17 @@ const NavBar = (): ReactNode => {
             alt="source_control"
           />
         </Link>
-        <Link
-          href={addPostPath}
-          className={`${li_className} ${
-            pathname === addPostPath ? activeClassName : ""
-          }`}
-        >
-          <Image className="w-full p-2" src={AdminIcon} alt="admin" />
-        </Link>
+        {loginState === "admin" && (
+          <Link
+            href={addPostPath}
+            className={`${li_className} ${
+              pathname === addPostPath ? activeClassName : ""
+            }`}
+          >
+            <Image className="w-full p-2" src={AddPostIcon} alt="admin" />
+          </Link>
+        )}
+
         <Login className="w-full p-2 cursor-pointer" />
       </ul>
     </div>

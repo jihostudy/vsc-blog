@@ -1,6 +1,6 @@
 "use client";
 import Portal from "@/app/components/ModalPortal";
-import AddPostIcon from "@/public/icons/add_post.png";
+import AdminIcon from "@/public/icons/admin.png";
 
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
@@ -74,7 +74,7 @@ const Login = ({ className }: { className?: string }): ReactNode => {
       )}
       <Image
         className={className}
-        src={AddPostIcon}
+        src={AdminIcon}
         alt="source_control"
         onClick={() => {
           if (!loggedIn) setOpenLogin(true);
