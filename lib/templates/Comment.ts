@@ -5,7 +5,6 @@ export interface commentType {
   timeStamp: Date;
   icon: string;
 }
-
 export const initComment: commentType = {
   id: "",
   postID: "",

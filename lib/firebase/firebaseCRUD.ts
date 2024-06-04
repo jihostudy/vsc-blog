@@ -118,11 +118,14 @@ export const getAllFolders = async (): Promise<folderType[]> => {
 
 export const getAllComments = async (): Promise<commentType[]> => {
   try {
-    const res = await getDocs(getCollection("folders"));
+    const res = await getDocs(getCollection("comments"));
     const dataList: commentType[] = res.docs.map((doc) => {
+      const { timeStamp } = doc.data();
+
       return {
         ...(doc.data() as commentType),
         id: doc.id,
+        timeStamp: timeStamp.toDate(),
       };
     });
     console.log("Fetched comments");
