@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 // Firebase
 import { addPost } from "@/lib/firebase/firebaseCRUD";
 // Type
@@ -13,6 +13,7 @@ import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
 import delayTimeout from "@/lib/functions/asyncTimeout";
+import useFolderState from "@/lib/context/folderStore";
 
 interface SubmitBtnProps {
   newPost: postType;
@@ -43,26 +44,38 @@ const AddPostBtn = ({ newPost }: SubmitBtnProps): ReactNode => {
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { folderState, setFolderState } = useFolderState();
+
+  const selectedFolder: string | undefined =
+    newPost.folderID === ""
+      ? folderState.find((folder) => folder.id === newPost.id)?.folderName
+      : "Root";
 
   //functions
   // Submit
-  const submitHandler = async (isImp: boolean): Promise<undefined> => {
-    try {
-      const data: postType = {
-        ...newPost,
-        timeStamp: new Date(), // 현재 시간
-      };
-      setIsSaving(true);
-      addPost(data);
+  const submitHandler = async (submit: boolean): Promise<undefined> => {
+    if (submit === true) {
+      try {
+        const data: postType = {
+          ...newPost,
+          timeStamp: new Date(), // 현재 시간
+        };
 
-      // customRevalidateTag("notice");
-      await delayTimeout(1000);
-      // const nextPath: Path = "/notification?page=1"; // 해당 글로 이동
-      router.push("/");
-    } catch (error) {
-      console.log("Error Occured on Submitting!", error);
+        setIsSaving(true);
+        addPost(data);
+
+        // customRevalidateTag("notice");
+        await delayTimeout(1000);
+        // const nextPath: Path = "/notification?page=1"; // 해당 글로 이동
+        router.push("/");
+      } catch (error) {
+        console.log("Error Occured on Submitting!", error);
+      }
+    } else if (submit === false) {
+      handleClose();
     }
   };
+
   return (
     <>
       <Button
@@ -90,8 +103,9 @@ const AddPostBtn = ({ newPost }: SubmitBtnProps): ReactNode => {
           ) : (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Submit Post?
+                Add Post?
               </Typography>
+
               <div className="flex w-full items-center justify-evenly">
                 <Button
                   color="primary"
