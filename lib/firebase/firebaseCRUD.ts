@@ -12,8 +12,9 @@ import {
 // type
 import { postType } from "../templates/post";
 import { folderType } from "../templates/folder";
+import { commentType } from "../templates/Comment";
 
-const getCollection = (collectionName: "posts" | "folders" | "readme") =>
+const getCollection = (collectionName: "posts" | "folders" | "comments") =>
   collection(db, collectionName);
 
 // Create
@@ -22,7 +23,7 @@ export const addPost = async (post: postType) => {
   try {
     const res = await getDocs(getCollection("posts"));
     const exists: boolean = res.docs.some((doc) => doc.id === id);
-    // 수정
+    // 글 수정
     if (exists) {
       const modify_doc = await updateDoc(doc(db, "posts", id), data);
     }
@@ -40,7 +41,6 @@ export const addFolder = async (folder: folderType) => {
   try {
     const res = await getDocs(getCollection("folders"));
     const exists: boolean = res.docs.some((doc) => doc.id === id);
-    console.log("Error?");
 
     // 폴더 수정
     if (exists) {
@@ -55,6 +55,24 @@ export const addFolder = async (folder: folderType) => {
   }
 };
 
+export const addComment = async (comment: commentType) => {
+  const { id, ...data } = comment;
+  try {
+    const res = await getDocs(getCollection("comments"));
+    const exists: boolean = res.docs.some((doc) => doc.id === id);
+
+    // 댓글 수정
+    if (exists) {
+      const modify_doc = await updateDoc(doc(db, "comments", id), data);
+    }
+    // 생성
+    else {
+      const new_doc = await addDoc(getCollection("comments"), data);
+    }
+  } catch (error) {
+    console.log("Error occured on adding comments!", error);
+  }
+};
 // Read
 export const getAllPosts = async (): Promise<postType[]> => {
   try {
@@ -88,6 +106,26 @@ export const getAllFolders = async (): Promise<folderType[]> => {
       };
     });
     console.log("Fetched folders");
+
+    console.log(dataList);
+
+    return dataList;
+  } catch (error) {
+    console.log(`error occured on firebaseCRUD: ${error}`);
+    return [];
+  }
+};
+
+export const getAllComments = async (): Promise<commentType[]> => {
+  try {
+    const res = await getDocs(getCollection("folders"));
+    const dataList: commentType[] = res.docs.map((doc) => {
+      return {
+        ...(doc.data() as commentType),
+        id: doc.id,
+      };
+    });
+    console.log("Fetched comments");
 
     console.log(dataList);
 
