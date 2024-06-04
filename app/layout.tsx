@@ -30,6 +30,7 @@ export default function RootLayout({
         <NavBar />
         <PostList />
         {children}
+        <div id="modal-root"></div>
       </body>
     </html>
   );
