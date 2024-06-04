@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useState } from "react";
 // components
-import Greetings from "@/app/components/Greetings";
+import Greetings from "@/app/components/main/Greetings";
 // Firebase
 import { getAllFolders, getAllPosts } from "@/lib/firebase/firebaseCRUD";
 // type

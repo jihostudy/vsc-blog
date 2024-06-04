@@ -68,6 +68,7 @@ const AddPostBtn = ({ newPost }: SubmitBtnProps): ReactNode => {
         await delayTimeout(1000);
         // const nextPath: Path = "/notification?page=1"; // 해당 글로 이동
         router.push("/");
+        router.refresh();
       } catch (error) {
         console.log("Error Occured on Submitting!", error);
       }

@@ -1,9 +1,8 @@
 import React, { ReactNode, useEffect } from "react";
-import { commentType, initComment } from "@/lib/templates/Comment";
-import data from "@/public/data/data.json";
-import { convertTimestamp } from "@/lib/functions/converTimestamp";
+import { commentType, initComment } from "@/lib/templates/comment";
+import { convertTimestamp } from "@/lib/functions/convertTimestamp";
 import { addComment } from "@/lib/firebase/firebaseCRUD";
-import AddComment from "./UI/AddComment";
+import AddComment from "../UI/AddComment";
 import { postType } from "@/lib/templates/post";
 
 interface TerminalProps {
@@ -17,7 +16,10 @@ const Terminal = ({ post, commentList }: TerminalProps): ReactNode => {
   const comments = commentList.map((comment) => {
     const time = convertTimestamp(comment.timeStamp);
     return (
-      <li className="w-full h-1/4 flex justify-start items-center">
+      <li
+        key={comment.id}
+        className="w-full h-1/4 flex justify-start items-center"
+      >
         <span className="h-full w-[20%] flex items-center">{time}</span>
         <span className="h-full w-[80%] flex items-center">
           {comment.contents}
@@ -34,7 +36,7 @@ const Terminal = ({ post, commentList }: TerminalProps): ReactNode => {
   // });
 
   return (
-    <div className="w-full px-2 h-1/5 absolute bottom-0 border-t-1 border-solid border-[#3E3E3E]">
+    <div className="w-full px-2 h-1/5 absolute bottom-0 border-t-1 border-solid border-[#3E3E3E] bg-post">
       <div className="w-full flex items-center h-1/5">
         Comments {commentList.length}
       </div>

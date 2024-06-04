@@ -6,8 +6,8 @@ import { Fira_Code } from "next/font/google";
 import { NextUIProviders } from "@/lib/providers/NextUIProvider";
 import { NextUIProvider } from "@nextui-org/react";
 
-import NavBar from "./components/NavBar";
-import PostList from "./components/PostList";
+import NavBar from "./components/common/NavBar";
+import PostList from "./components/posts/PostList";
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Fira_Code({ subsets: ["latin"] });

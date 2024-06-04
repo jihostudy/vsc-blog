@@ -12,6 +12,8 @@ padding 먹히게 하기 다시 하기 (완료)
 - post likes 표시
 - post 공유 기능
 
+post 레이아웃 에러 / mdx parsing 추가
+
 <부가>
 - Add Folder 숨겨두었다가 누르면 입력창 나오게끔. (완료)
 - 로그인 기능 

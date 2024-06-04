@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 // Components
-import PostEditor from "@/app/components/PostEditor";
+import PostEditor from "@/app/components/posts/PostEditor";
 import { getAllFolders, getAllPosts } from "@/lib/firebase/firebaseCRUD";
 import { postType } from "@/lib/templates/post";
 import { folderType } from "@/lib/templates/folder";

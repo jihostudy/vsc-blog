@@ -18,7 +18,7 @@ import {
   folderType,
   initClientfolder,
 } from "@/lib/templates/folder";
-import AddFolderBtn from "./UI/AddFolderBtn";
+import AddFolderBtn from "../UI/AddFolderBtn";
 import { updateViewCount } from "@/lib/firebase/firebaseCRUD";
 import Image from "next/image";
 import useLoginStore from "@/lib/context/loginStore";

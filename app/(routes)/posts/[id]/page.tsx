@@ -2,7 +2,7 @@ import React, { ReactNode, Suspense } from "react";
 // Providers
 import MDXRemoteProvider from "@/lib/providers/MDXRemoteProvider";
 // Components
-import Tab from "@/app/components/Tab";
+import Tab from "@/app/components/common/Tab";
 // Firebase
 import {
   getAllComments,
@@ -13,9 +13,9 @@ import {
 import { postType } from "@/lib/templates/post";
 import { folderType } from "@/lib/templates/folder";
 import { Timestamp } from "firebase/firestore";
-import Terminal from "@/app/components/Terminal";
-import { commentType } from "@/lib/templates/Comment";
-import { convertTimestamp } from "@/lib/functions/converTimestamp";
+import Terminal from "@/app/components/posts/Terminal";
+import { commentType } from "@/lib/templates/comment";
+import { convertTimestamp } from "@/lib/functions/convertTimestamp";
 
 interface PostPageProps {
   params: { id: string };
@@ -48,15 +48,17 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
           </div>
         }
       >
-        {/* 제목 */}
-        <div className="pb-2 w-fit self-center flex items-center justify-center text-5xl font-bold border-b-2 border-solid border-white">
-          {title}
+        <div className="w-full h-4/5 overflow-y-auto flex flex-col justify-start items-center py-4">
+          {/* 제목 */}
+          <div className="pb-2 w-fit self-center flex items-center justify-center text-5xl font-bold border-b-2 border-solid border-white">
+            {title}
+          </div>
+          {/* 작성날짜 | 조회수*/}
+          <div className="pt-2 w-fit self-center flex items-center justify-center text-base font-bold">
+            {formattedDate} | 조회수 {viewCount}
+          </div>
+          <MDXRemoteProvider source={content} />
         </div>
-        {/* 작성날짜 | 조회수*/}
-        <div className="pt-2 w-fit self-center flex items-center justify-center text-base font-bold">
-          {formattedDate} | 조회수 {viewCount}
-        </div>
-        <MDXRemoteProvider source={content} />
         <Terminal post={post} commentList={commentList} />
       </Suspense>
     </>

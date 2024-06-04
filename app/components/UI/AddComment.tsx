@@ -3,7 +3,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 // Images & Icons
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 // Type
-import { commentType, initComment } from "@/lib/templates/Comment";
+import { commentType, initComment } from "@/lib/templates/comment";
 import { TextField } from "@mui/material";
 import { postType } from "@/lib/templates/post";
 import { addComment } from "@/lib/firebase/firebaseCRUD";

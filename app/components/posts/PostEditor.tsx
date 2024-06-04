@@ -9,12 +9,12 @@ import React, {
 // Icons & Images
 // Type
 import { postType, initPost } from "@/lib/templates/post";
-import AddPostBtn from "./UI/AddPostBtn";
+import AddPostBtn from "../UI/AddPostBtn";
 import useFocusStore from "@/lib/context/focusStore";
 import { clientFolderType, folderType } from "@/lib/templates/folder";
 import usePostStore from "@/lib/context/postStore";
 import useFolderState from "@/lib/context/folderStore";
-import SelectFolderBtn from "./SelectFolderBtn";
+import SelectFolderBtn from "@/app/components/UI/SelectFolderBtn";
 
 interface PostEditorProps {
   posts: postType[];
@@ -65,11 +65,11 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
   // functions
   const handleContentChange = (contents: string): void => {
     setMaxLineNumber(contents.split("\n").length);
-    if (contents)
-      setNewPost((prev) => ({
-        ...prev,
-        contents,
-      }));
+
+    setNewPost((prev) => ({
+      ...prev,
+      contents,
+    }));
   };
   const handleTitleChange = (title: string): void => {
     setNewPost((prev) => ({

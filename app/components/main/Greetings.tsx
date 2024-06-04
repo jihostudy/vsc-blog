@@ -48,7 +48,7 @@ const Greetings = ({ posts, folders }: PostProps): ReactNode => {
         src={VSCLogo}
         alt="vscode_image"
       />
-      <p>Welcome to {UserInfo.name}'s Blog!</p>
+      <p>Welcome to {UserInfo.name}&apos;s Blog!</p>
       <div className="grid pt-4 grid-cols-2 grid-rows-2 text-lg h-[10vh] aspect-square">
         {/* <p className="text-xl grid-cols-2"> */}
         <p>✉️</p>
@@ -58,8 +58,6 @@ const Greetings = ({ posts, folders }: PostProps): ReactNode => {
         >
           {UserInfo.email}
         </Link>
-        {/* </p> */}
-        {/* <p className="flex justify-start items-center grid-cols-2"> */}
         <Image
           className="p-2 w-4/5 aspect-square"
           src={GithubLogo}
@@ -72,7 +70,6 @@ const Greetings = ({ posts, folders }: PostProps): ReactNode => {
         >
           {UserInfo.githubURL}
         </Link>
-        {/* </p> */}
       </div>
     </div>
   );

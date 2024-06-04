@@ -1,10 +1,10 @@
 "use client";
-import Portal from "@/app/components/ModalPortal";
+import Portal from "@/app/components/common/ModalPortal";
 import AdminIcon from "@/public/icons/admin.png";
 
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
-import TextInput from "./nextUI/TextInput";
+import TextInput from "../UI/TextInput";
 import { Button } from "@nextui-org/react";
 import useLoginStore from "@/lib/context/loginStore";
 import { useRouter } from "next/navigation";

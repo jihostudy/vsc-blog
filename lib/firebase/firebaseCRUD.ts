@@ -12,7 +12,7 @@ import {
 // type
 import { postType } from "../templates/post";
 import { folderType } from "../templates/folder";
-import { commentType } from "../templates/Comment";
+import { commentType } from "../templates/comment";
 
 const getCollection = (collectionName: "posts" | "folders" | "comments") =>
   collection(db, collectionName);
