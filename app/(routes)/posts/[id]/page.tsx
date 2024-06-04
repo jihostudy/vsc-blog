@@ -4,11 +4,18 @@ import MDXRemoteProvider from "@/lib/providers/MDXRemoteProvider";
 // Components
 import Tab from "@/app/components/Tab";
 // Firebase
-import { getAllFolders, getAllPosts } from "@/lib/firebase/firebaseCRUD";
+import {
+  getAllComments,
+  getAllFolders,
+  getAllPosts,
+} from "@/lib/firebase/firebaseCRUD";
 // Type
 import { postType } from "@/lib/templates/post";
 import { folderType } from "@/lib/templates/folder";
 import { Timestamp } from "firebase/firestore";
+import Terminal from "@/app/components/Terminal";
+import { commentType } from "@/lib/templates/Comment";
+import { convertTimestamp } from "@/lib/functions/converTimestamp";
 
 interface PostPageProps {
   params: { id: string };
@@ -16,6 +23,7 @@ interface PostPageProps {
 const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
   const posts: postType[] = await getAllPosts();
   const folders: folderType[] = await getAllFolders();
+  const comments: commentType[] = await getAllComments();
 
   const post = posts.find((post) => post.id === params.id);
   // post가 undefined아님!
@@ -25,19 +33,11 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
   const content: string = post.contents;
   const title: string = post.title;
   const viewCount: number = post.viewCount;
-  // 원하는 형식으로 변환
-  const date = new Date(post.timeStamp);
+  const formattedDate = convertTimestamp(post.timeStamp);
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; // getMonth()는 0부터 시작하므로 1을 더해줍니다.
-  const day = date.getDate();
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
-
-  const formattedDate = `${year}. ${month}. ${day}. ${hours}:${
-    minutes < 10 ? "0" + minutes : minutes
-  }`;
-
+  const commentList: commentType[] = comments.filter(
+    (comment) => comment.postID === params.id
+  );
   return (
     <>
       <Tab posts={posts as postType[]} folders={folders as folderType[]} />
@@ -57,6 +57,7 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
           {formattedDate} | 조회수 {viewCount}
         </div>
         <MDXRemoteProvider source={content} />
+        <Terminal commentList={commentList} />
       </Suspense>
     </>
   );
