@@ -32,20 +32,43 @@ const components = {
       {props.children}
     </p>
   ),
+  strong: (props: any) => (
+    <strong {...props} className="font-bold">
+      {props.children}
+    </strong>
+  ),
   a: (props: any) => (
-    <a {...props} className="my-4 text-blue-500 hover:underline">
+    <a {...props} className="my-4 text-blue-500 underline" target="_blank">
       {props.children}
     </a>
   ),
+  ol: (props: any) => (
+    <ol {...props} className="my-4 list-decimal list-inside marker:text-white">
+      {props.children}
+    </ol>
+  ),
   ul: (props: any) => (
-    <ul {...props} className="my-4 list-disc list-inside">
+    <ul {...props} className="my-4 list-disc list-inside marker:text-white">
       {props.children}
     </ul>
   ),
   li: (props: any) => (
-    <li {...props} className="my-4">
+    <li {...props} className=" my-4">
       {props.children}
     </li>
+  ),
+  em: (props: any) => (
+    <em {...props} className="italic">
+      {props.children}
+    </em>
+  ),
+  blockquote: (props: any) => (
+    <blockquote
+      {...props}
+      className="my-4 pl-4 border-l-4 border-gray-500 italic"
+    >
+      {props.children}
+    </blockquote>
   ),
   hr: Hr,
   code: ({ className, children }: any) => {

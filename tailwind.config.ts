@@ -30,6 +30,10 @@ const config: Config = {
     "text-2xl",
     "my-4",
     "px-10",
+    "list-disc",
+    "list-inside",
+    "list-decimal",
+    "italic",
   ],
   theme: {
     extend: {

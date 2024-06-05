@@ -1,25 +1,7 @@
-/newpost 에서 data fetching 하기 (완료)
-padding 먹히게 하기 다시 하기 (완료)
-- 마지막 선택한 폴더 / 파일 hightlight (완료)
-- Editor 꾸미기, 글쓰기시 폴더 선택 (완료)
-- 메인페이지 꾸미기 마치 깃허브 처럼 보이게 (완료)
-<글쓰기>
-- Folder 선택 드롭다운 (완료)
-- 조회수 늘리기 기능 (완료)
-
-- 댓글 기능(완료)
 - post에 likes 추가
 - post likes 표시
 - post 공유 기능
 
-post 레이아웃 에러 / mdx parsing 추가
-
-<부가>
-- Add Folder 숨겨두었다가 누르면 입력창 나오게끔. (완료)
-- 로그인 기능 
-
-<홈>
-- 소개글
-
-
-- ReadME 작성   
+postlist isopen error 고치기
+mdx parsing 추가하기
+tab 현재 경로 인것 보라색으로 
