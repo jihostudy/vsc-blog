@@ -1,4 +1,5 @@
 ## 0. 실행 예시
+![image](https://github.com/jihostudy/vsc-blog/assets/110150963/1de38df6-2f17-48ee-ad3a-eaa001f40e65)
 
 ## 1. 구현 목표
 VSCode와 유사한 인터페이스를 통해 친숙한 환경에서 블로그를 생성하고 관리할 수 있도록 합니다. </br>
