@@ -1,93 +1,126 @@
-## 구현 목표
-본 프로젝트는, Visual Studio Code 형태의 블로그 오픈소스를 제작하는 것에 있다. <br/>
-사용자는 Firebase를 통해 쉽게 서버를 구축하고, 블로그를 원하는 만큼 수정할 수 있다.
+## 0. 실행 예시
+![image](https://github.com/jihostudy/vsc-blog/assets/110150963/1de38df6-2f17-48ee-ad3a-eaa001f40e65)
 
-## 구현 기능
-- Firebase를 활용한 백엔드 구축
-  Post, Folder, Comment 관리
+## 1. 구현 목표
+VSCode와 유사한 인터페이스를 통해 친숙한 환경에서 블로그를 생성하고 관리할 수 있도록 합니다. </br>
+사용자가 자신만의 스타일로 블로그를 커스터마이즈할 수 있도록 다양한 설정 옵션을 제공합니다. </br>
+
+## 2. 구현 기능
 - 사용자 정보 저장 및 Verify
+- 마크다운 형식의 포스트 작성 및 관리 기능.
+- 폴더 관리 및 Tab 관리 
+- Firebase를 활용한 백엔드 서버 구축
+- 방문자들이 포스트에 댓글을 달 수 있는 기능.
 
 
-## 사용 방법
-1. git clone
-   - 프로젝트를 로컬 폴더에 다운로드 받습니다.
-2. npm install
-   - 해당 프로젝트에 필요한 라이브러리 및 Dependency를 전부 설치하는 명령어입니다.
-3. Firebase 연동
-   1. Firebase 계정을 생성합니다.
-   2. Go to Console > 프로젝트 추가
-      해당 블로그에 사용할 프로젝트를 추가합니다.<br/>
-    ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/0b955f39-f67e-4a60-97ae-118707ff597e)<br/>
-    ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/5696ef3d-69ff-45b8-9a83-bcd539915543)<br/>
-    
-   3. 프로젝트 정보를 입력합니다.<br />
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/a556b429-92e6-41f8-82e4-4cb51e2d1044)<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/ae6d7168-4550-4cd4-9172-ebd9328a3b47)<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/253b0027-71e6-4f49-bdbc-8f206681526c)<br/>
+## 3. 사용 방법
+1. git clone <br/>
+   프로젝트를 로컬 폴더에 다운로드 받습니다. <br />
+   ```bash
+   git clone https://github.com/jihostudy/vsc-blog.git .
+   ```
+2. npm install <br/>
+   해당 프로젝트에 필요한 라이브러리 및 Dependency를 전부 설치하는 명령어입니다. <br />
+   ```bash
+   cd vsc-blog
+   npm install
+   ```
+3. Firebase 연동 <br/>
+   해당 경로의 문헌을 참고하여 Firebase 계정을 생성해주세요. <br/>
+   [Firebase 계정 생성 Notion](https://vivid-chamomile-2f5.notion.site/vsc-blog-2936ba044b4f4aee871dea753bc1c7ef?pvs=4) <br/>
+   이제 Firebase를 사용할 준비가 완료되었습니다. <br/>
+   발급받은 Key의 외부유출에 주의해주세요.<br/>
    
-   4. Database 활성화 <br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/b6e2174b-12e7-4d63-a36f-a18d20c11ca3)<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/2f36d2d6-ab64-4f7d-b984-35bb18d6ea9c)<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/b3a3d78c-95a8-4fd1-b501-07d939d6d685)<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/8c63d82c-c6e6-490f-a66c-7687aea01a91)<br/>
+4.  유저 정보 입력
+    1. public > Info > UserInfo.ts 에 본인의 정보를 입력해주세요. <br/>
+       ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/d96b51ca-5a20-438d-a22b-352fec93fbec) <br/>
 
-   5. Database 권한 변경 <br />
-      데이터베이스에 자유롭게 접근하기 위해, 권한을 변경해주세요.<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/d2d5e631-7d98-4098-a6bd-91663e024b3d)<br/>
-
-   6. API Key발급 <br/>
-      Web에서 Firebase를 사용하기 위해, WebKey를 발급받아주세요.<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/fc676e01-38f6-4a0e-9283-7a14afebc832)<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/5e8a6fc9-4950-46e8-abc8-4c3326d2e9f0)<br/>
-
-      이후, 팝업 화면의 내용을 토대로 7번을 수행해주세요.<br/>
-      ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/be4242ae-93f4-4cd1-aa72-e9b12fb96a89)<br/>
-      * 해당 Key는 사용불가능한 예시입니다.<br/>
-   7. .env.local 파일에 다음과 같이 입력합니다.<br/>
-      ```bash
-      #firebase
-      NEXT_PUBLIC_API_KEY = AIzaSyBTaHrJqCNu3bvGXyuLNna7CZI302bsZBw
-      NEXT_PUBLIC_AUTH_DOMAIN = enter-your-proj-name.firebaseapp.com
-      NEXT_PUBLIC_PROJECT_ID = enter-your-proj-name
-      NEXT_PUBLIC_STORAGE_BUCKET = enter-your-proj-name.appspot.com
-      NEXT_PUBLIC_SENDER_ID = 724253861173
-      NEXT_PUBLIC_APP_ID = 1:724253861173:web:fab110518d288a98d9187c
-      NEXT_PUBLIC_MEASUREMENT_ID = G-21XXELQ9KF
-      ```
-
-    이제 Firebase를 사용할 준비가 완료되었습니다. <br/>
-    발급받은 Key의 외부유출에 주의해주세요.<br/>
-   
-5.  유저 정보 입력
-    1. public > Info > UserInfo.ts 코드에 본인의 정보를 입력해주세요.
     2. .env.local에 다음과 같이 본인확인에 사용할 비밀번호를 입력해주세요. <br/>
        ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/c7acbec0-f26c-4abb-bae9-0b5b1c3f3456) <br/>
 
-6. npm run build
-   - 프로젝트를 빌드
+## 4. 로컬에서 빌드 및 실행하기
+```bash
+(Root 경로에서 실행)
+$ docker build -t [Docker Image 이름:태그] . --build-arg ENV_MODE:.local
+$ docker run -d -p 3000:3000 [실행할 Docker Image 이름]
 
-7. npm start
-   - 프로젝트를 실행
-  
+```
 
-## 실행 예시
-첨부 에정
+## 5. Tech
+### 5.1. Tech Stack
+- Next.js (Typescript)
+- Tailwind CSS
+- Firebase
+- Zustand
+- Material UI / Next UI / react-icons
+
+### 5.2. Project Structure
+```
+vsc-blog/
+├── app
+│   ├── (routes)
+│   │   ├── newPost
+│   │   └── posts
+│   │       ├── [id]
+│   ├── components
+│   │   ├── UI
+│   │   ├── common
+│   │   ├── main
+│   │   └── posts
+│   └── styles
+├── lib
+│   ├── context
+│   ├── firebase
+│   ├── functions
+│   ├── providers
+│   └── templates
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   ├── Info
+│   └── icons
+├── Dockerfile
+├── README.md
+├── tailwind.config.ts
+└── tsconfig.json
+```
+
+## 6. Contribute
+### 6.1 How to Contribute
+1. Fork it!
+2. Create your feature branch: `git checkout -b feature/my-new-feature`
+3. Make Changes on created feature branch
+4. Commit your changes: `git commit -m 'Add some feature'` 
+   (Recommend to use gitmoji for commits)
+5. Push to the branch: `git push origin feature/my-new-feature`
+6. Submit a pull request merging into the `main` branch.
+
+### 6.2 :wave: Contributors
+<a href="https://github.com/jihostudy/vsc-blog/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=jihostudy/vsc-blog" />
+</a>
+
+## 7. Todo List
+**Functions <br/>**
+[1] 글 수정 <br/>
+[2] 크기 조정 기능: Terminal & PostList Resizable <br/>
+[3] 검색 기능: 블로그 내의 포스트를 쉽게 검색할 수 있는 기능 <br/>
+[4] 카테고리 및 태그 관리: 포스트를 카테고리 및 태그로 분류하여 관리할 수 있는 기능 <br/>
+[5] 소셜 미디어 공유: 포스트를 다양한 소셜 미디어에 쉽게 공유할 수 있는 기능 <br/>
+[6] 구독 기능: 방문자들이 블로그를 구독하고 새 포스트에 대한 알림을 받을 수 있는 기능 <br/>
+
+**UI/UX <br/>**
+[1] 테마 기능: 원하는 테마로 변경 가능 (White mode) <br/>
+[2] 댓글 꾸미기: 댓글마다 Icon 선택 가능 <br/>
+[3] 반응형 디자인 <br/>
 
 ## Reference
-[https://nextjs.org/](https://github.com/vercel/next.js) <br/>
-[https://mui.com/material-ui/material-icons/](https://mui.com/material-ui/material-icons/)<br/>
-
-
-## Todo List
-기능 <br/>
-[ ] 글 수정 <br/>
-[ ] Resize Terminal & PostList <br/>
-
-UI <br/>
-[ ] White Mode <br/>
-[ ] Comment with Icons <br/>
-
-
+[Next.js](https://github.com/vercel/next.js) <br/>
+[Material UI](https://mui.com/material-ui/material-icons/)<br/>
+[Next UI](https://nextui.org/) <br/>
+[Firebase](https://firebase.google.com/?_gl=1*1r8nsd9*_up*MQ..*_ga*MjQ4MTY1NTM1LjE3MTc1NzUxMjM.*_ga_CW55HF8NVT*MTcxNzU3NTEyMy4xLjAuMTcxNzU3NTEzNS4wLjAuMA..&hl=ko)
 
 
 
