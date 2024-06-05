@@ -30,7 +30,7 @@ const Greetings = ({ posts, folders }: PostProps): ReactNode => {
     const clientFolderState: clientFolderType[] = folders.map((folder) => {
       const wasItOpen: boolean = folderState.find(
         (provFolder) => provFolder.id === folder.id
-      )
+      )?.isOpen
         ? true
         : false;
       return {

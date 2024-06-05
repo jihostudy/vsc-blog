@@ -27,10 +27,12 @@ const Tab = ({ posts, folders }: TabProps): ReactNode => {
     setPostState(posts);
     const clientFolderState: clientFolderType[] = folders.map((folder) => {
       const wasItOpen: boolean = folderState.find(
-        (provFolder) => provFolder.id === folder.id
-      )
+        (prevFolder) => prevFolder.id === folder.id
+      )?.isOpen
         ? true
         : false;
+      console.log("Folder ", folder, "Exists: ", wasItOpen);
+
       return {
         ...folder,
         isOpen: wasItOpen,

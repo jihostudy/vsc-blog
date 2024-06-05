@@ -42,9 +42,6 @@ const AddComment = ({ post }: AddCommentProps): ReactNode => {
     }
   };
 
-  useEffect(() => {
-    console.log(newComment);
-  }, [newComment]);
   return (
     <form
       onSubmit={submitHandler}
