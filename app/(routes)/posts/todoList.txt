@@ -2,5 +2,4 @@
 - post likes 표시
 - post 공유 기능
 
-postlist isopen error 고치기
 tab 현재 경로 인것 보라색으로 

@@ -7,6 +7,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import usePostStore from "@/lib/context/postStore";
 import useTabStore from "@/lib/context/tabStore";
 import useFolderState from "@/lib/context/folderStore";
+import useFocusStore from "@/lib/context/focusStore";
+
 // Type
 import { postType } from "@/lib/templates/post";
 import { clientFolderType, folderType } from "@/lib/templates/folder";
@@ -21,7 +23,7 @@ const Tab = ({ posts, folders }: TabProps): ReactNode => {
   // States
   const { postState, setPostState } = usePostStore();
   const { folderState, setFolderState } = useFolderState();
-
+  const { focusedID } = useFocusStore();
   const { tabState, setTabState } = useTabStore();
   useEffect(() => {
     setPostState(posts);
@@ -31,7 +33,6 @@ const Tab = ({ posts, folders }: TabProps): ReactNode => {
       )?.isOpen
         ? true
         : false;
-      console.log("Folder ", folder, "Exists: ", wasItOpen);
 
       return {
         ...folder,
@@ -42,13 +43,15 @@ const Tab = ({ posts, folders }: TabProps): ReactNode => {
   }, []);
 
   const tabs = tabState.map((tab) => {
+    const isOpen: boolean = tab.id === focusedID;
+    const list_style = isOpen
+      ? "flex justify-end items-center bg-[#8F75D2] text-[#E2C08D] w-fit h-full p-2 hover:bg-white cursor-pointer"
+      : "flex justify-end items-center bg-navbar w-fit h-full p-2 hover:bg-white hover:text-black cursor-pointer";
     return (
       <li
         key={tab.id}
         onClick={() => router.push(`/posts/${tab.id}`)}
-        className={
-          "flex justify-end items-center bg-navbar w-fit h-full p-2 hover:bg-white hover:text-black cursor-pointer"
-        }
+        className={list_style}
       >
         {tab.title}
         <button
