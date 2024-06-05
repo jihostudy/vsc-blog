@@ -40,7 +40,11 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
   );
   return (
     <>
-      <Tab posts={posts as postType[]} folders={folders as folderType[]} />
+      <Tab
+        posts={posts as postType[]}
+        folders={folders as folderType[]}
+        postID={params.id}
+      />
       <Suspense
         fallback={
           <div className="flex items-center justify-center w-full h-full">

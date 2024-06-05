@@ -16,9 +16,10 @@ import { clientFolderType, folderType } from "@/lib/templates/folder";
 interface TabProps {
   posts: postType[];
   folders: folderType[];
+  postID: string;
 }
 
-const Tab = ({ posts, folders }: TabProps): ReactNode => {
+const Tab = ({ posts, folders, postID }: TabProps): ReactNode => {
   const router = useRouter();
   // States
   const { postState, setPostState } = usePostStore();
@@ -40,6 +41,24 @@ const Tab = ({ posts, folders }: TabProps): ReactNode => {
       };
     });
     setFolderState(clientFolderState);
+
+    // posts에서 새로고침 한 경우 : 현재 페이지 tabSTate에 추가
+    const isRefresh = !tabState.find((tab) => tab.id === postID);
+    if (isRefresh) {
+      console.log("PostState", postState);
+      console.log("PostID", postID);
+
+      const currPost: postType | undefined = postState.find(
+        (post) => post.id === postID
+      );
+      console.log("1");
+
+      if (currPost) {
+        console.log("2");
+
+        setTabState("open", currPost as postType);
+      }
+    }
   }, []);
 
   const tabs = tabState.map((tab) => {
