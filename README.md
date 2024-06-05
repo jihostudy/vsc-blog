@@ -8,7 +8,7 @@ VSCode와 유사한 인터페이스를 통해 친숙한 환경에서 블로그�
 ## 2. 구현 기능
 - 사용자 정보 저장 및 Verify
 - 마크다운 형식의 포스트 작성 및 관리 기능.
-- 폴더 관리 및 Tab 관리 
+- 폴더 및 Tab 관리 
 - Firebase를 활용한 백엔드 서버 구축
 - 방문자들이 포스트에 댓글을 달 수 있는 기능.
 
@@ -17,7 +17,7 @@ VSCode와 유사한 인터페이스를 통해 친숙한 환경에서 블로그�
 1. git clone <br/>
    프로젝트를 로컬 폴더에 다운로드 받습니다. <br />
    ```bash
-   git clone https://github.com/jihostudy/vsc-blog.git .
+   git clone https://github.com/jihostudy/vsc-blog.git
    ```
 2. npm install <br/>
    해당 프로젝트에 필요한 라이브러리 및 Dependency를 전부 설치하는 명령어입니다. <br />
@@ -116,7 +116,7 @@ vsc-blog/
 [2] 댓글 꾸미기: 댓글마다 Icon 선택 가능 <br/>
 [3] 반응형 디자인 <br/>
 
-## Reference
+## 8. Reference
 [Next.js](https://github.com/vercel/next.js) <br/>
 [Material UI](https://mui.com/material-ui/material-icons/)<br/>
 [Next UI](https://nextui.org/) <br/>
