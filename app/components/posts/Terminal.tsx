@@ -12,8 +12,8 @@ interface TerminalProps {
 
 const Terminal = ({ post, commentList }: TerminalProps): ReactNode => {
   console.log(commentList);
-
-  const comments = commentList.map((comment) => {
+  const sortedComments = commentList.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());
+  const comments = sortedComments.map((comment) => {
     const time = convertTimestamp(comment.timeStamp);
     return (
       <li
