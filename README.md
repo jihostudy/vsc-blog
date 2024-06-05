@@ -5,12 +5,24 @@
 VSCode와 유사한 인터페이스를 통해 친숙한 환경에서 블로그를 생성하고 관리할 수 있도록 합니다. </br>
 사용자가 자신만의 스타일로 블로그를 커스터마이즈할 수 있도록 다양한 설정 옵션을 제공합니다. </br>
 
-## 2. 구현 기능
+## 2. 핵심 기능
 - 사용자 정보 저장 및 Verify
-- 마크다운 형식의 포스트 작성 및 관리 기능.
-- 폴더 및 Tab 관리 
-- Firebase를 활용한 백엔드 서버 구축
-- 방문자들이 포스트에 댓글을 달 수 있는 기능.
+  .env.local로 설정한 비밀번호로 로그인 시 세션을 발행합니다. <br/>
+   ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/87c959f5-35fa-4741-a7a5-768b0e29752c)
+
+- 마크다운 형식의 포스트 작성 및 관리 기능. <br/>
+![image](https://github.com/jihostudy/vsc-blog/assets/110150963/bf56c7a4-5fd0-4775-bc55-d7aba223fd21) <br/>
+   components props로 MDX 스타일을 수정가능합니다. <br/>
+  
+- 폴더 및 Tab 관리  <br/>
+- Firebase를 활용한 백엔드 서버 구축 <br/>
+  ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/c3b85577-8e6f-4190-90e3-397d1599b1d6) <br/>
+  Firebase를 통해 서버 및 DB를 구축합니다. <br/>
+
+- 방문자들이 포스트에 댓글을 달 수 있는 기능. <br/>
+  ![image](https://github.com/jihostudy/vsc-blog/assets/110150963/0526b054-2641-4f15-b396-0b71a7297eff) <br/>
+  
+
 
 
 ## 3. 사용 방법
