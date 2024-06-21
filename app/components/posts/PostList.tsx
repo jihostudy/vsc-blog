@@ -5,6 +5,7 @@ import Link from "next/link";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FolderLogo from "@/public/icons/add_folder.png";
+import { MdOutlineDeleteOutline } from "react-icons/md";
 
 // context
 import usePostStore from "@/lib/context/postStore";
@@ -19,9 +20,10 @@ import {
   initClientfolder,
 } from "@/lib/templates/folder";
 import AddFolderBtn from "../UI/AddFolderBtn";
-import { updateViewCount } from "@/lib/firebase/firebaseCRUD";
+import { deleteFolder, updateViewCount } from "@/lib/firebase/firebaseCRUD";
 import Image from "next/image";
 import useLoginStore from "@/lib/context/loginStore";
+import { useRouter } from "next/navigation";
 
 interface ClientFolderType extends folderType {
   isOpen: boolean; // DB에 저장할 필요 없음
@@ -29,7 +31,7 @@ interface ClientFolderType extends folderType {
 
 const PostList = (): ReactNode => {
   const { loginState } = useLoginStore();
-
+  const router = useRouter();
   // ref
   const postListRef = useRef<HTMLDivElement>(null);
   const folderContainerRef = useRef<HTMLDivElement>(null);
@@ -81,6 +83,20 @@ const PostList = (): ReactNode => {
     updateViewCount(toggledFile.id);
   };
 
+//######################################################
+//########################PHASE2########################
+//######################################################
+
+  const deleteFolderHandler = async (folderId: string) => {
+    await deleteFolder(folderId);
+    router.replace("/");
+    window.location.reload();
+  }
+
+//######################################################
+//########################PHASE2########################
+//######################################################
+
   const getFileList = (
     folderInput: ClientFolderType,
     fileInput: postType[],
@@ -122,7 +138,7 @@ const PostList = (): ReactNode => {
     const folderList = folders?.map((folder: clientFolderType) => (
       <React.Fragment key={folder.folderName}>
         <div
-          className={folder.id === focusedID ? focusedStyle : style}
+          className={`${folder.id === focusedID ? focusedStyle : style} relative`}
           onClick={() => toggleFolder(folder)}
         >
           {folder.isOpen ? (
@@ -132,6 +148,9 @@ const PostList = (): ReactNode => {
           )}
 
           {folder.folderName}
+          <div className="(delete button) absolute flex items-center justify-end w-full h-full cursor-pointer opacity-0 hover:opacity-100">
+            <MdOutlineDeleteOutline className="w-5 h-5 mr-2" onClick={() => deleteFolderHandler(folder.id)}/>
+          </div>
         </div>
         {folder.isOpen && (
           <ul className="flex flex-col w-full">
