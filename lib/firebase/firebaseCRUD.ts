@@ -180,6 +180,14 @@ export const deletePost = async (postId: string) => {
   await deleteDoc(doc(db, "posts", postId));
 };
 
+//Put
+
+export const increaseTtabong = async (commentId: string, currentTtabong: number) => {
+  await updateDoc(doc(db, "comments", commentId), {
+    ttabong: ++currentTtabong
+  });
+}
+
 //######################################################
 //########################PHASE2########################
 //######################################################

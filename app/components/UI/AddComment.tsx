@@ -55,7 +55,7 @@ const AddComment = ({ post }: AddCommentProps): ReactNode => {
         variant="standard"
         sx={{
           input: { color: "white" },
-          width: "80%",
+          width: "100%",
           "& .MuiInput-underline:before": { borderBottomColor: "white" },
           "& .MuiInput-underline:after": { borderBottomColor: "white" },
           marginBottom: "0.5rem",
