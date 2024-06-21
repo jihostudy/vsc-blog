@@ -170,7 +170,6 @@ export const deleteFolder = async (folderId: string) => {
       }
     })
   );
-  
   //delete folder
   await deleteDoc(doc(db, "folders", folderId));
 };

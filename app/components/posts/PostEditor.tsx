@@ -26,7 +26,7 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
 //######################################################
 //########################PHASE2########################
 //######################################################
-  const { isEditing, postId, unsetIsEditState } = useIsEditState();
+  const { isEditing, postId } = useIsEditState();
   console.log(folders)
   const editingPost: postType|undefined = posts.find(post => post.id == postId);
 

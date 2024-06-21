@@ -1,10 +1,8 @@
 "use client";
-
-import { deletePost } from "@/lib/firebase/firebaseCRUD";
 //######################################################
 //########################PHASE2########################
 //######################################################
-
+import { deletePost } from "@/lib/firebase/firebaseCRUD";
 import {
   Button,
   Popover,
@@ -27,10 +25,10 @@ const ToolBox = ({ className }: { className: string }): ReactNode => {
   };
 
   const handleDelete = async () => {
-    deletePost(postId).then(() => {
+    await deletePost(postId);
       router.replace("/");
-    });
   };
+  
   return (
     <div className={className}>
       <Popover placement="top" showArrow offset={10}>
@@ -45,16 +43,14 @@ const ToolBox = ({ className }: { className: string }): ReactNode => {
                   defaultValue="80%"
                   size="sm"
                   variant="bordered"
-                  onClick={handleEdit}
-                >
+                  onClick={handleEdit}>
                   수정
                 </Button>
                 <Button
                   defaultValue="80%"
                   size="sm"
                   variant="bordered"
-                  onClick={handleDelete}
-                >
+                  onClick={handleDelete}>
                   삭제
                 </Button>
               </div>

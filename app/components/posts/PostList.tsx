@@ -148,9 +148,15 @@ const PostList = (): ReactNode => {
           )}
 
           {folder.folderName}
+          {/* //######################################################
+              //########################PHASE2########################
+              //###################################################### */}
           <div className="(delete button) absolute flex items-center justify-end w-full h-full cursor-pointer opacity-0 hover:opacity-100">
             <MdOutlineDeleteOutline className="w-5 h-5 mr-2" onClick={() => deleteFolderHandler(folder.id)}/>
           </div>
+          {/* //######################################################
+              //########################PHASE2########################
+              //###################################################### */}
         </div>
         {folder.isOpen && (
           <ul className="flex flex-col w-full">

@@ -14,9 +14,11 @@ import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
 import delayTimeout from "@/lib/functions/asyncTimeout";
 import useFolderState from "@/lib/context/folderStore";
+import useIsEditState from "@/lib/context/isEditStore";
 
 interface SubmitBtnProps {
   isEditing: boolean;
+  unsetIsEditState: () => void;
   newPost: postType;
 }
 
@@ -40,6 +42,7 @@ const style = {
 
 const AddPostBtn = ({ isEditing, newPost }: SubmitBtnProps): ReactNode => {
   const router = useRouter();
+  const {unsetIsEditState} = useIsEditState();
   // States
   const [open, setOpen] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -76,6 +79,7 @@ const AddPostBtn = ({ isEditing, newPost }: SubmitBtnProps): ReactNode => {
     } else if (submit === false) {
       handleClose();
     }
+    unsetIsEditState();
   };
 
   return (
