@@ -16,6 +16,7 @@ import { Timestamp } from "firebase/firestore";
 import Terminal from "@/app/components/posts/Terminal";
 import { commentType } from "@/lib/templates/comment";
 import { convertTimestamp } from "@/lib/functions/convertTimestamp";
+import ToolBox from "@/app/components/UI/ToolBox";
 
 interface PostPageProps {
   params: { id: string };
@@ -61,7 +62,7 @@ const Page = async ({ params }: PostPageProps): Promise<ReactNode> => {
           <div className="pt-2 w-fit self-center flex items-center justify-center text-base font-bold">
             {formattedDate} | 조회수 {viewCount}
           </div>
-          
+          <ToolBox className="absolute bottom-12 right-12 top-auto"/>
           <MDXRemoteProvider source={content} />
         </div>
         <Terminal post={post} commentList={commentList} />
