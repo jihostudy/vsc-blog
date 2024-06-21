@@ -16,6 +16,7 @@ import delayTimeout from "@/lib/functions/asyncTimeout";
 import useFolderState from "@/lib/context/folderStore";
 
 interface SubmitBtnProps {
+  isEditing: boolean;
   newPost: postType;
 }
 
@@ -37,7 +38,7 @@ const style = {
   borderRadius: "1rem",
 };
 
-const AddPostBtn = ({ newPost }: SubmitBtnProps): ReactNode => {
+const AddPostBtn = ({ isEditing, newPost }: SubmitBtnProps): ReactNode => {
   const router = useRouter();
   // States
   const [open, setOpen] = useState<boolean>(false);
@@ -97,14 +98,14 @@ const AddPostBtn = ({ newPost }: SubmitBtnProps): ReactNode => {
           {isSaving ? (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                저장 중입니다
+                Saving...
               </Typography>
               <CircularProgress />
             </>
           ) : (
             <>
               <Typography id="modal-modal-title" variant="h6" component="h2">
-                Add Post?
+                {isEditing ? "Edit Post?" : "Add Post?"}
               </Typography>
 
               <div className="flex w-full items-center justify-evenly">

@@ -19,11 +19,11 @@ const NavBar = (): ReactNode => {
   const router = useRouter();
   const pathname = usePathname();
   if (pathname === "") {
-    console.log("Home");
+    // console.log("Home");
   } else if (pathname === "/newPost") {
-    console.log("newPost");
+    // console.log("newPost");
   } else if (pathname.includes("posts")) {
-    console.log("posts");
+    // console.log("posts");
   }
   // paths
   const mainPath: path = "/";

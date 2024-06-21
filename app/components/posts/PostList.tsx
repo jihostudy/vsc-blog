@@ -40,8 +40,8 @@ const PostList = (): ReactNode => {
   const {
     focusedID,
     setFocusedIDState,
-    foucsedSupFolderID,
-    setFoucsedSupFolderIDState,
+    focusedSupFolderID,
+    setFocusedSupFolderIDState: setFocusedSupFolderIDState,
   } = useFocusStore();
   const { folderState, setFolderState } = useFolderState();
 
@@ -62,7 +62,7 @@ const PostList = (): ReactNode => {
       };
       setFolderState(newFolderList);
     }
-    setFoucsedSupFolderIDState(toggledFolder.id); // 자신의 id
+    setFocusedSupFolderIDState(toggledFolder.id); // 자신의 id
     setFocusedIDState(toggledFolder.id);
   };
 
@@ -75,7 +75,7 @@ const PostList = (): ReactNode => {
       element.id == toggledFile.folderID;
     })?.id;
 
-    setFoucsedSupFolderIDState(targetFolder as string);
+    setFocusedSupFolderIDState(targetFolder as string);
     setFocusedIDState(toggledFile.id);
     setTabState("open", toggledFile);
     updateViewCount(toggledFile.id);
@@ -162,7 +162,7 @@ const PostList = (): ReactNode => {
       ) {
         console.log("Exe");
 
-        setFoucsedSupFolderIDState(ROOT_ID);
+        setFocusedSupFolderIDState(ROOT_ID);
       }
     };
 
@@ -171,7 +171,7 @@ const PostList = (): ReactNode => {
     return () => {
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [setFoucsedSupFolderIDState]);
+  }, [setFocusedSupFolderIDState]);
 
   return (
     <div className="w-[12vw] bg-postlist h-screen text-white" ref={postListRef}>

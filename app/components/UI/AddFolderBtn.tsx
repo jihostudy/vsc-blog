@@ -22,13 +22,13 @@ const AddFolderBtn = (): ReactNode => {
   // State
   const [newFolder, setNewFolder] = useState<folderType>(initFolder);
   const { folderState, setFolderState } = useFolderState();
-  const { foucsedSupFolderID } = useFocusStore();
+  const { focusedSupFolderID } = useFocusStore();
 
   const addFolderHandler = async () => {
     try {
       const folder: folderType = {
         ...newFolder,
-        supFolderID: foucsedSupFolderID,
+        supFolderID: focusedSupFolderID,
       };
       const res = await addFolder(folder); // DB는 folderType 넘겨주기
       delayTimeout(1000);

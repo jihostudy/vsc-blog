@@ -13,12 +13,12 @@ import {
 import React, { ChangeEvent, ReactNode } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 interface SelectFolderBtnProps {
-  newPost: postType;
+  folderId:string;
   handleFolderChange: (folderID: string) => void;
 }
 
 const SelectFolderBtn = ({
-  newPost,
+  folderId,
   handleFolderChange,
 }: SelectFolderBtnProps): ReactNode => {
   // State
@@ -71,7 +71,7 @@ const SelectFolderBtn = ({
           id="select"
           type="string"
           label="Select Folder Name"
-          value={newPost.folderID}
+          value={folderId}
           onChange={handleChange}
           IconComponent={(props) => (
             <ArrowDropDownIcon {...props} style={{ color: "white" }} />
