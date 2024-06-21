@@ -45,7 +45,7 @@ const AddComment = ({ post }: AddCommentProps): ReactNode => {
   return (
     <form
       onSubmit={submitHandler}
-      className="w-full flex justify-start items-center h-1/5"
+      className="w-full flex justify-start items-center h-1/5 mt-4"
     >
       <TextField
         id="standard-basic"

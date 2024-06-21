@@ -78,7 +78,7 @@ const Login = ({ className }: { className?: string }): ReactNode => {
         alt="source_control"
         onClick={() => {
           if (!loggedIn) setOpenLogin(true);
-          else router.push("/reception/admin" as path);
+          else router.push("/" as path);
         }}
       />
     </>

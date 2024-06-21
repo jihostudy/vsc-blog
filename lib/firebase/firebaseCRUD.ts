@@ -3,6 +3,7 @@ import { db } from "./firebaseConfig";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   documentId,
   getDocs,
@@ -45,10 +46,12 @@ export const addFolder = async (folder: folderType) => {
     // 폴더 수정
     if (exists) {
       const modify_doc = await updateDoc(doc(db, "folders", id), data);
+      console.log("folder modified");
     }
     // 생성
     else {
       const new_doc = await addDoc(getCollection("folders"), data);
+      console.log("folder added");
     }
   } catch (error) {
     console.log("Error occured on adding Folders!", error);
@@ -151,3 +154,32 @@ export const updateViewCount = async (postID: string) => {
 };
 
 // Delete
+
+//######################################################
+//########################PHASE2########################
+//######################################################
+
+export const deleteFolder = async (folderId: string) => {
+  const allPosts: postType[] = await getAllPosts();
+
+  //delete all posts in the folder
+  Promise.all(
+    allPosts.map(async (post) => {
+      if (post.folderID == folderId) {
+        await deletePost(post.id)
+      }
+    })
+  );
+  
+  //delete folder
+  await deleteDoc(doc(db, "folders", folderId));
+};
+
+export const deletePost = async (postId: string) => {
+  //delete single post
+  await deleteDoc(doc(db, "posts", postId));
+};
+
+//######################################################
+//########################PHASE2########################
+//######################################################

@@ -36,9 +36,9 @@ const Terminal = ({ post, commentList }: TerminalProps): ReactNode => {
   // });
 
   return (
-    <div className="w-full px-2 h-1/5 absolute bottom-0 border-t-1 border-solid border-[#3E3E3E] bg-post">
+    <div className="w-full px-2 h-1/5 border-t-1 border-solid border-[#3E3E3E] bg-post">
       <div className="w-full flex items-center h-1/5">
-        Comments {commentList.length}
+        {commentList.length} Comments 
       </div>
       <ul className="w-full h-4/5  overflow-y-auto">
         {comments}
