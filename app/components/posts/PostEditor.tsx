@@ -15,18 +15,39 @@ import { clientFolderType, folderType } from "@/lib/templates/folder";
 import usePostStore from "@/lib/context/postStore";
 import useFolderState from "@/lib/context/folderStore";
 import SelectFolderBtn from "@/app/components/UI/SelectFolderBtn";
+import useIsEditState from "@/lib/context/isEditStore";
 
 interface PostEditorProps {
   posts: postType[];
   folders: folderType[];
 }
 const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
+
+//######################################################
+//########################PHASE2########################
+//######################################################
+  const { isEditing, postId } = useIsEditState();
+  console.log(folders)
+  const editingPost: postType|undefined = posts.find(post => post.id == postId);
+
   // State
   const { postState, setPostState } = usePostStore();
   const { folderState, setFolderState } = useFolderState();
-  const { foucsedSupFolderID } = useFocusStore();
+  const { focusedSupFolderID: focusedSupFolderID } = useFocusStore();
 
-  const [newPost, setNewPost] = useState<postType>(initPost);
+  const initialPost:postType = isEditing && editingPost ? {
+    id: editingPost.id, // 파베 받은 data
+    contents: editingPost.contents,
+    timeStamp: new Date(editingPost.timeStamp),
+    title: editingPost.title,
+    viewCount: editingPost.viewCount,
+    folderID: editingPost.folderID,
+  } : initPost;
+
+  const [newPost, setNewPost] = useState<postType>(initialPost);
+//######################################################
+//########################PHASE2########################
+//######################################################
   const [maxLineNumber, setMaxLineNumber] = useState<number>(1);
   // Ref
   const lineNumberRef = useRef<HTMLTextAreaElement>(null);
@@ -57,9 +78,9 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
     setFolderState(clientFolderState);
 
     // 초기설정
-    setNewPost((prev) => ({
+    !isEditing && setNewPost((prev) => ({
       ...prev,
-      folderID: foucsedSupFolderID,
+      folderID: focusedSupFolderID,
     }));
   }, []);
   // functions
@@ -108,10 +129,11 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
         <textarea
           className="outline-none w-4/5 h-full bg-post p-4 text-2xl"
           placeholder="Title"
+          value={newPost.title}
           onChange={(e) => handleTitleChange(e.target.value)}
         />
         <SelectFolderBtn
-          newPost={newPost}
+          folderId={newPost.folderID}
           handleFolderChange={handleFolderChange}
         />
       </div>
@@ -131,7 +153,7 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
           onChange={(e) => handleContentChange(e.target.value)}
         />
       </div>
-      <AddPostBtn newPost={newPost} />
+      <AddPostBtn isEditing={isEditing} newPost={newPost} />
     </form>
   );
 };

@@ -1,9 +1,8 @@
 import React, { ReactNode, useEffect } from "react";
 import { commentType, initComment } from "@/lib/templates/comment";
-import { convertTimestamp } from "@/lib/functions/convertTimestamp";
-import { addComment } from "@/lib/firebase/firebaseCRUD";
 import AddComment from "../UI/AddComment";
 import { postType } from "@/lib/templates/post";
+import Comment from "./Comment";
 
 interface TerminalProps {
   post: postType;
@@ -13,20 +12,7 @@ interface TerminalProps {
 const Terminal = ({ post, commentList }: TerminalProps): ReactNode => {
   console.log(commentList);
   const sortedComments = commentList.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());
-  const comments = sortedComments.map((comment) => {
-    const time = convertTimestamp(comment.timeStamp);
-    return (
-      <li
-        key={comment.id}
-        className="w-full h-1/4 flex justify-start items-center"
-      >
-        <span className="h-full w-[20%] flex items-center">{time}</span>
-        <span className="h-full w-[80%] flex items-center">
-          {comment.contents}
-        </span>
-      </li>
-    );
-  });
+  const comments = sortedComments.map(comment => <Comment key={comment.id} comment={comment}/>);
 
   // addComment({
   //   ...initComment,
@@ -36,11 +22,11 @@ const Terminal = ({ post, commentList }: TerminalProps): ReactNode => {
   // });
 
   return (
-    <div className="w-full px-2 h-1/5 absolute bottom-0 border-t-1 border-solid border-[#3E3E3E] bg-post">
-      <div className="w-full flex items-center h-1/5">
-        Comments {commentList.length}
+    <div className="w-full px-2 h-1/5 border-t-1 border-solid border-[#3E3E3E] bg-post">
+      <div className="w-4/5 flex items-center h-1/5">
+        {commentList.length} Comments 
       </div>
-      <ul className="w-full h-4/5  overflow-y-auto">
+      <ul className="w-4/5 h-4/5  overflow-y-auto">
         {comments}
         <AddComment post={post} />
       </ul>

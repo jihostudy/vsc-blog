@@ -2,20 +2,20 @@ import { create } from "zustand";
 // type
 export const ROOT_ID = "";
 
-interface FoucsState {
+interface FocusState {
   focusedID: string;
-  foucsedSupFolderID: string;
+  focusedSupFolderID: string;
   setFocusedIDState: (ID: string) => void;
-  setFoucsedSupFolderIDState: (folderID: string) => void;
+  setFocusedSupFolderIDState: (folderID: string) => void;
 }
 
-const useFocusStore = create<FoucsState>((set) => ({
+const useFocusStore = create<FocusState>((set) => ({
   focusedID: ROOT_ID,
-  foucsedSupFolderID: ROOT_ID,
+  focusedSupFolderID: ROOT_ID,
   setFocusedIDState: (ID: string) => set({ focusedID: ID }),
-  setFoucsedSupFolderIDState: (folderID: string) =>
+  setFocusedSupFolderIDState: (folderID: string) =>
     set({
-      foucsedSupFolderID: folderID,
+      focusedSupFolderID: folderID,
     }),
 }));
 

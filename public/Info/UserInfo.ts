@@ -1,5 +1,5 @@
 export const UserInfo = {
-  name: "Jiho",
-  email: "cale.jiho@gmail.com",
-  githubURL: "https://github.com/jihostudy",
+  name: "JungHwan",
+  email: "wjdghksdl00@gmail.com",
+  githubURL: "https://github.com/kinwjdghks",
 };

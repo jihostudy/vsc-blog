@@ -99,7 +99,7 @@ const components = {
 
 export default function MDXRemoteProvider(props: any) {
   return (
-    <div className="w-full px-10">
+    <div className="w-full flex-1 px-10">
       <MDXRemote
         {...props}
         components={{ ...components, ...(props.components || {}) }}
