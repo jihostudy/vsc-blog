@@ -5,7 +5,7 @@ interface IsEditState {
   setIsEditState: (postId: string) => void;
   unsetIsEditState: () => void;
 }
-const useIsEditState = create<IsEditState>((set) => ({
+const useIsEditStore = create<IsEditState>((set) => ({
   isEditing: false,
   postId: null,
   setIsEditState: (postId: string) => {
@@ -22,4 +22,4 @@ const useIsEditState = create<IsEditState>((set) => ({
   },
 }));
 
-export default useIsEditState;
+export default useIsEditStore;

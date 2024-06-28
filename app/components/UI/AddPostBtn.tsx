@@ -12,12 +12,11 @@ import { CircularProgress } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useRouter } from "next/navigation";
 import delayTimeout from "@/lib/functions/asyncTimeout";
-import useFolderState from "@/lib/context/folderStore";
-import useIsEditState from "@/lib/context/isEditStore";
+import useFolderStore from "@/lib/context/folderStore";
+import useIsEditStore from "@/lib/context/isEditStore";
 
-interface SubmitBtnProps {
+interface AddPostBtnProps {
   isEditing: boolean;
-  unsetIsEditState: () => void;
   newPost: postType;
 }
 
@@ -39,23 +38,24 @@ const style = {
   borderRadius: "1rem",
 };
 
-const AddPostBtn = ({ isEditing, newPost }: SubmitBtnProps): ReactNode => {
+const AddPostBtn = ({ isEditing, newPost }: AddPostBtnProps): ReactNode => {
   const router = useRouter();
-  const { unsetIsEditState } = useIsEditState();
+  // Context
+  const { unsetIsEditState } = useIsEditStore();
+  const { folderState, setFolderState } = useFolderStore();
   // States
   const [open, setOpen] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const { folderState, setFolderState } = useFolderState();
-
+  // Variables
   const selectedFolder: string | undefined =
     newPost.folderID === ""
       ? folderState.find((folder) => folder.id === newPost.id)?.folderName
       : "Root";
 
-  //functions
+  // Functions
   // Submit
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const submitHandler = async (submit: boolean): Promise<undefined> => {
     if (submit === true) {
       try {

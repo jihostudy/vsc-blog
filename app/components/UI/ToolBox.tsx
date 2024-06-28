@@ -9,12 +9,12 @@ import {
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
-import useIsEditState from "@/lib/context/isEditStore";
+import useIsEditStore from "@/lib/context/isEditStore";
 
 const ToolBox = ({ className }: { className: string }): ReactNode => {
   const router = useRouter();
   const postId = usePathname().split("/")[2];
-  const { setIsEditState } = useIsEditState();
+  const { setIsEditState } = useIsEditStore();
 
   const handleEdit = () => {
     setIsEditState(postId);

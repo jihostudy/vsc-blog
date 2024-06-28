@@ -52,7 +52,7 @@ const Login = ({ className }: { className?: string }): ReactNode => {
             />
             <div className="fixed flex flex-col items-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <label className={`w-full text-center font-bold text-2xl`}>
-                관리자 비밀번호
+                Admin Password
               </label>
               <TextInput
                 password
@@ -66,7 +66,7 @@ const Login = ({ className }: { className?: string }): ReactNode => {
                 onClick={onLogin}
                 color={!error ? "primary" : "danger"}
               >
-                관리자 로그인
+                Login
               </Button>
             </div>
           </main>

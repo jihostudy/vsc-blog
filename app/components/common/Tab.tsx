@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 // Context
 import usePostStore from "@/lib/context/postStore";
 import useTabStore from "@/lib/context/tabStore";
-import useFolderState from "@/lib/context/folderStore";
+import useFolderStore from "@/lib/context/folderStore";
 import useFocusStore from "@/lib/context/focusStore";
 
 // Type
@@ -23,7 +23,7 @@ const Tab = ({ posts, folders, postID }: TabProps): ReactNode => {
   const router = useRouter();
   // States
   const { postState, setPostState } = usePostStore();
-  const { folderState, setFolderState } = useFolderState();
+  const { folderState, setFolderState } = useFolderStore();
   const { focusedID } = useFocusStore();
   const { tabState, setTabState } = useTabStore();
   useEffect(() => {

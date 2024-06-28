@@ -1,5 +1,5 @@
 "use client";
-import useFolderState from "@/lib/context/folderStore";
+import useFolderStore from "@/lib/context/folderStore";
 import { clientFolderType, initClientfolder } from "@/lib/types/folder";
 import { postType } from "@/lib/types/post";
 import {
@@ -22,7 +22,7 @@ const SelectFolderBtn = ({
   handleFolderChange,
 }: SelectFolderBtnProps): ReactNode => {
   // State
-  const { folderState, setFolderState } = useFolderState();
+  const { folderState, setFolderState } = useFolderStore();
 
   // Constant
   const folderContainsRooteState: clientFolderType[] = [

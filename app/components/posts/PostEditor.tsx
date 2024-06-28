@@ -7,30 +7,30 @@ import React, {
   useState,
 } from "react";
 // Icons & Images
+import AddPostBtn from "@/app/components/UI/AddPostBtn";
+import SelectFolderBtn from "@/app/components/UI/SelectFolderBtn";
 // Type
 import { postType, initPost } from "@/lib/types/post";
-import AddPostBtn from "../UI/AddPostBtn";
-import useFocusStore from "@/lib/context/focusStore";
 import { clientFolderType, folderType } from "@/lib/types/folder";
+// Context
+import useFocusStore from "@/lib/context/focusStore";
 import usePostStore from "@/lib/context/postStore";
-import useFolderState from "@/lib/context/folderStore";
-import SelectFolderBtn from "@/app/components/UI/SelectFolderBtn";
-import useIsEditState from "@/lib/context/isEditStore";
+import useFolderStore from "@/lib/context/folderStore";
+import useIsEditStore from "@/lib/context/isEditStore";
 
 interface PostEditorProps {
   posts: postType[];
   folders: folderType[];
 }
 const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
-  const { isEditing, postId } = useIsEditState();
-  console.log(folders);
+  const { isEditing, postId } = useIsEditStore();
   const editingPost: postType | undefined = posts.find(
     (post) => post.id == postId
   );
 
   // State
   const { postState, setPostState } = usePostStore();
-  const { folderState, setFolderState } = useFolderState();
+  const { folderState, setFolderState } = useFolderStore();
   const { focusedSupFolderID: focusedSupFolderID } = useFocusStore();
 
   const initialPost: postType =

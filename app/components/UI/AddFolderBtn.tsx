@@ -10,14 +10,14 @@ import { path } from "@/lib/types/paths";
 import { initFolder, clientFolderType, folderType } from "@/lib/types/folder";
 // Context
 import useFocusStore from "@/lib/context/focusStore";
-import useFolderState from "@/lib/context/folderStore";
+import useFolderStore from "@/lib/context/folderStore";
 import delayTimeout from "@/lib/functions/asyncTimeout";
 
 const AddFolderBtn = (): ReactNode => {
   const router = useRouter();
   // State
   const [newFolder, setNewFolder] = useState<folderType>(initFolder);
-  const { folderState, setFolderState } = useFolderState();
+  const { folderState, setFolderState } = useFolderStore();
   const { focusedSupFolderID } = useFocusStore();
 
   const addFolderHandler = async () => {

@@ -11,7 +11,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 import usePostStore from "@/lib/context/postStore";
 import useTabStore from "@/lib/context/tabStore";
 import useFocusStore, { ROOT_ID } from "@/lib/context/focusStore";
-import useFolderState from "@/lib/context/folderStore";
+import useFolderStore from "@/lib/context/folderStore";
 // Types
 import { postType } from "@/lib/types/post";
 import {
@@ -45,7 +45,7 @@ const PostList = (): ReactNode => {
     focusedSupFolderID,
     setFocusedSupFolderIDState: setFocusedSupFolderIDState,
   } = useFocusStore();
-  const { folderState, setFolderState } = useFolderState();
+  const { folderState, setFolderState } = useFolderStore();
 
   // Functions
   const toggleFolder = (toggledFolder: ClientFolderType) => {

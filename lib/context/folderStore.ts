@@ -7,7 +7,7 @@ interface FolderState {
   folderState: clientFolderType[];
   setFolderState: (folders: clientFolderType[]) => void;
 }
-const useFolderState = create<FolderState>((set) => ({
+const useFolderStore = create<FolderState>((set) => ({
   folderState: [],
   setFolderState: (folders: clientFolderType[]) =>
     set({
@@ -15,4 +15,4 @@ const useFolderState = create<FolderState>((set) => ({
     }),
 }));
 
-export default useFolderState;
+export default useFolderStore;

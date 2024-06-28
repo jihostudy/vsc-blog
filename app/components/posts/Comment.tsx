@@ -1,16 +1,27 @@
 "use client";
-import { increaseTtabong } from "@/lib/firebase/firebaseCRUD";
-import { convertTimestamp } from "@/lib/functions/convertTimestamp";
-import { commentType } from "@/lib/types/comment";
 import { ReactNode, useState } from "react";
+import { useRouter } from "next/navigation";
+// firebase
+import { updateLikes } from "@/lib/firebase/firebaseCRUD";
+// types
+import { commentType } from "@/lib/types/comment";
+// functions
+import { convertTimestamp } from "@/lib/functions/convertTimestamp";
+// Icons & Images
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa";
-const Comment = ({ comment }: { comment: commentType }): ReactNode => {
-  const [isThumbHovered, setIsThumbHovered] = useState<boolean>(false);
+interface CommentProps {
+  comment: commentType;
+}
+const Comment = ({ comment }: CommentProps): ReactNode => {
+  const router = useRouter();
   const time = convertTimestamp(comment.timeStamp);
-  const onTtabongClickhandler = async () => {
-    await increaseTtabong(comment.id, comment.ttabong);
-    window.location.reload();
+  // States
+  const [isLikesHovered, setIsLikesHovered] = useState<boolean>(false);
+  // Functions
+  const likeClickhandler = async () => {
+    await updateLikes(comment.id, comment.likes);
+    router.refresh();
   };
 
   return (
@@ -24,15 +35,15 @@ const Comment = ({ comment }: { comment: commentType }): ReactNode => {
       </span>
       <span
         className="h-full w-10 flex gap-2"
-        onMouseOut={() => setIsThumbHovered(false)}
-        onMouseOver={() => setIsThumbHovered(true)}
+        onMouseOut={() => setIsLikesHovered(false)}
+        onMouseOver={() => setIsLikesHovered(true)}
       >
-        {isThumbHovered ? (
-          <FaThumbsUp onClick={onTtabongClickhandler} />
+        {isLikesHovered ? (
+          <FaThumbsUp onClick={likeClickhandler} />
         ) : (
           <FaRegThumbsUp />
         )}
-        {comment.ttabong}
+        {comment.likes}
       </span>
     </li>
   );

@@ -4,7 +4,7 @@ import Link from "next/link";
 
 // Context
 import usePostStore from "@/lib/context/postStore";
-import useFolderState from "@/lib/context/folderStore";
+import useFolderStore from "@/lib/context/folderStore";
 import { UserInfo } from "@/public/Info/UserInfo";
 // Images & Icons
 import VSCLogo from "@/public/icons/vscode_black.svg";
@@ -23,7 +23,7 @@ interface PostProps {
 const Greetings = ({ posts, folders }: PostProps): ReactNode => {
   // State
   const { postState, setPostState } = usePostStore();
-  const { folderState, setFolderState } = useFolderState();
+  const { folderState, setFolderState } = useFolderStore();
 
   useEffect(() => {
     setPostState(posts);

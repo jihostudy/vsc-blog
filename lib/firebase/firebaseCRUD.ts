@@ -108,9 +108,6 @@ export const getAllFolders = async (): Promise<folderType[]> => {
         id: doc.id,
       };
     });
-    console.log("Fetched folders");
-
-    console.log(dataList);
 
     return dataList;
   } catch (error) {
@@ -153,6 +150,12 @@ export const updateViewCount = async (postID: string) => {
   }
 };
 
+export const updateLikes = async (commentId: string, currentLikes: number) => {
+  await updateDoc(doc(db, "comments", commentId), {
+    likes: ++currentLikes,
+  });
+};
+
 // Delete
 export const deleteFolder = async (folderId: string) => {
   const allPosts: postType[] = await getAllPosts();
@@ -172,15 +175,4 @@ export const deleteFolder = async (folderId: string) => {
 export const deletePost = async (postId: string) => {
   //delete single post
   await deleteDoc(doc(db, "posts", postId));
-};
-
-//Put
-
-export const increaseTtabong = async (
-  commentId: string,
-  currentTtabong: number
-) => {
-  await updateDoc(doc(db, "comments", commentId), {
-    ttabong: ++currentTtabong,
-  });
 };
