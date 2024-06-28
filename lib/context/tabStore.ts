@@ -1,6 +1,6 @@
 import { create } from "zustand";
 // type
-import { postType } from "../templates/post";
+import { postType } from "../types/post";
 interface tabState {
   tabState: postType[];
   setTabState: (

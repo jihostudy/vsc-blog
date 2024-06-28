@@ -1,7 +1,7 @@
 import { create } from "zustand";
-import { folderType } from "../templates/folder";
+import { folderType } from "../types/folder";
 // type
-import { clientFolderType } from "../templates/folder";
+import { clientFolderType } from "../types/folder";
 
 interface FolderState {
   folderState: clientFolderType[];

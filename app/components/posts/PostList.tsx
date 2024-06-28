@@ -13,12 +13,12 @@ import useTabStore from "@/lib/context/tabStore";
 import useFocusStore, { ROOT_ID } from "@/lib/context/focusStore";
 import useFolderState from "@/lib/context/folderStore";
 // Types
-import { postType } from "@/lib/templates/post";
+import { postType } from "@/lib/types/post";
 import {
   clientFolderType,
   folderType,
   initClientfolder,
-} from "@/lib/templates/folder";
+} from "@/lib/types/folder";
 import AddFolderBtn from "../UI/AddFolderBtn";
 import { deleteFolder, updateViewCount } from "@/lib/firebase/firebaseCRUD";
 import Image from "next/image";
@@ -83,19 +83,11 @@ const PostList = (): ReactNode => {
     updateViewCount(toggledFile.id);
   };
 
-//######################################################
-//########################PHASE2########################
-//######################################################
-
   const deleteFolderHandler = async (folderId: string) => {
     await deleteFolder(folderId);
     router.replace("/");
     window.location.reload();
-  }
-
-//######################################################
-//########################PHASE2########################
-//######################################################
+  };
 
   const getFileList = (
     folderInput: ClientFolderType,
@@ -138,7 +130,9 @@ const PostList = (): ReactNode => {
     const folderList = folders?.map((folder: clientFolderType) => (
       <React.Fragment key={folder.folderName}>
         <div
-          className={`${folder.id === focusedID ? focusedStyle : style} relative`}
+          className={`${
+            folder.id === focusedID ? focusedStyle : style
+          } relative`}
           onClick={() => toggleFolder(folder)}
         >
           {folder.isOpen ? (
@@ -148,15 +142,12 @@ const PostList = (): ReactNode => {
           )}
 
           {folder.folderName}
-          {/* //######################################################
-              //########################PHASE2########################
-              //###################################################### */}
           <div className="(delete button) absolute flex items-center justify-end w-full h-full cursor-pointer opacity-0 hover:opacity-100">
-            <MdOutlineDeleteOutline className="w-5 h-5 mr-2" onClick={() => deleteFolderHandler(folder.id)}/>
+            <MdOutlineDeleteOutline
+              className="w-5 h-5 mr-2"
+              onClick={() => deleteFolderHandler(folder.id)}
+            />
           </div>
-          {/* //######################################################
-              //########################PHASE2########################
-              //###################################################### */}
         </div>
         {folder.isOpen && (
           <ul className="flex flex-col w-full">

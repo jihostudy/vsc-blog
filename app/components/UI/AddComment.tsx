@@ -3,9 +3,9 @@ import React, { ReactNode, useEffect, useState } from "react";
 // Images & Icons
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 // Type
-import { commentType, initComment } from "@/lib/templates/comment";
+import { commentType, initComment } from "@/lib/types/comment";
 import { TextField } from "@mui/material";
-import { postType } from "@/lib/templates/post";
+import { postType } from "@/lib/types/post";
 import { addComment } from "@/lib/firebase/firebaseCRUD";
 import delayTimeout from "@/lib/functions/asyncTimeout";
 import { useRouter } from "next/navigation";
@@ -51,7 +51,6 @@ const AddComment = ({ post }: AddCommentProps): ReactNode => {
         id="standard-basic"
         type="text"
         placeholder="Add Comment"
-        // label="Add Comment"
         variant="standard"
         sx={{
           input: { color: "white" },

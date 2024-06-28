@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect } from "react";
-import { commentType, initComment } from "@/lib/templates/comment";
+import { commentType, initComment } from "@/lib/types/comment";
 import AddComment from "../UI/AddComment";
-import { postType } from "@/lib/templates/post";
+import { postType } from "@/lib/types/post";
 import Comment from "./Comment";
 
 interface TerminalProps {
@@ -11,27 +11,22 @@ interface TerminalProps {
 
 const Terminal = ({ post, commentList }: TerminalProps): ReactNode => {
   console.log(commentList);
-  const sortedComments = commentList.sort((a, b) => a.timeStamp.getTime() - b.timeStamp.getTime());
-  const comments = sortedComments.map(comment => <Comment key={comment.id} comment={comment}/>);
-
-  // addComment({
-  //   ...initComment,
-  //   postID: "hT3NzQ5ZMXkILKnSfrOh",
-  //   contents: "너무 유익해요~",
-  //   timeStamp: new Date(),
-  // });
+  const sortedComments = commentList.sort(
+    (a, b) => a.timeStamp.getTime() - b.timeStamp.getTime()
+  );
+  const comments = sortedComments.map((comment) => (
+    <Comment key={comment.id} comment={comment} />
+  ));
 
   return (
     <div className="w-full px-2 h-1/5 border-t-1 border-solid border-[#3E3E3E] bg-post">
       <div className="w-4/5 flex items-center h-1/5">
-        {commentList.length} Comments 
+        {commentList.length} Comments
       </div>
       <ul className="w-4/5 h-4/5  overflow-y-auto">
         {comments}
         <AddComment post={post} />
       </ul>
-
-      {/* <div>Write Comment</div> */}
     </div>
   );
 };

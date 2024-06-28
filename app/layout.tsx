@@ -3,9 +3,6 @@ import "./globals.css";
 // Fonts
 import { Fira_Code } from "next/font/google";
 // Components
-import { NextUIProviders } from "@/lib/providers/NextUIProvider";
-import { NextUIProvider } from "@nextui-org/react";
-
 import NavBar from "./components/common/NavBar";
 import PostList from "./components/posts/PostList";
 

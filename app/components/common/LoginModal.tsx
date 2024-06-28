@@ -8,7 +8,7 @@ import TextInput from "../UI/TextInput";
 import { Button } from "@nextui-org/react";
 import useLoginStore from "@/lib/context/loginStore";
 import { useRouter } from "next/navigation";
-import { path } from "@/lib/templates/paths";
+import { path } from "@/lib/types/paths";
 import Image from "next/image";
 
 const Login = ({ className }: { className?: string }): ReactNode => {

@@ -1,7 +1,4 @@
 "use client";
-//######################################################
-//########################PHASE2########################
-//######################################################
 import { deletePost } from "@/lib/firebase/firebaseCRUD";
 import {
   Button,
@@ -26,9 +23,9 @@ const ToolBox = ({ className }: { className: string }): ReactNode => {
 
   const handleDelete = async () => {
     await deletePost(postId);
-      router.replace("/");
+    router.replace("/");
   };
-  
+
   return (
     <div className={className}>
       <Popover placement="top" showArrow offset={10}>
@@ -43,14 +40,16 @@ const ToolBox = ({ className }: { className: string }): ReactNode => {
                   defaultValue="80%"
                   size="sm"
                   variant="bordered"
-                  onClick={handleEdit}>
+                  onClick={handleEdit}
+                >
                   수정
                 </Button>
                 <Button
                   defaultValue="80%"
                   size="sm"
                   variant="bordered"
-                  onClick={handleDelete}>
+                  onClick={handleDelete}
+                >
                   삭제
                 </Button>
               </div>
@@ -63,7 +62,3 @@ const ToolBox = ({ className }: { className: string }): ReactNode => {
 };
 
 export default ToolBox;
-
-//######################################################
-//########################PHASE2########################
-//######################################################

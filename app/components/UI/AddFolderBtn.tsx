@@ -6,12 +6,8 @@ import { addFolder } from "@/lib/firebase/firebaseCRUD";
 // Icons & Images
 import { TextField } from "@mui/material";
 // Types
-import { path } from "@/lib/templates/paths";
-import {
-  initFolder,
-  clientFolderType,
-  folderType,
-} from "@/lib/templates/folder";
+import { path } from "@/lib/types/paths";
+import { initFolder, clientFolderType, folderType } from "@/lib/types/folder";
 // Context
 import useFocusStore from "@/lib/context/focusStore";
 import useFolderState from "@/lib/context/folderStore";

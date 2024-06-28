@@ -4,10 +4,10 @@ import Greetings from "@/app/components/main/Greetings";
 // Firebase
 import { getAllFolders, getAllPosts } from "@/lib/firebase/firebaseCRUD";
 // type
-import { postType } from "@/lib/templates/post";
+import { postType } from "@/lib/types/post";
 import { NextUIProvider } from "@nextui-org/react";
 import { NextUIProviders } from "@/lib/providers/NextUIProvider";
-import { folderType } from "@/lib/templates/folder";
+import { folderType } from "@/lib/types/folder";
 
 const Home = async (): Promise<ReactNode> => {
   const posts = await getAllPosts();

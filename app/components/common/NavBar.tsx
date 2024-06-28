@@ -8,7 +8,7 @@ import SourceCodeIcon from "@/public/icons/source_control.png";
 import AddPostIcon from "@/public/icons/add_post.png";
 
 // constants
-import { path } from "@/lib/templates/paths";
+import { path } from "@/lib/types/paths";
 import Link from "next/link";
 import Login from "./LoginModal";
 import useLoginStore from "@/lib/context/loginStore";
@@ -18,13 +18,6 @@ const NavBar = (): ReactNode => {
   // next
   const router = useRouter();
   const pathname = usePathname();
-  if (pathname === "") {
-    // console.log("Home");
-  } else if (pathname === "/newPost") {
-    // console.log("newPost");
-  } else if (pathname.includes("posts")) {
-    // console.log("posts");
-  }
   // paths
   const mainPath: path = "/";
   const addPostPath: path = "/newPost";

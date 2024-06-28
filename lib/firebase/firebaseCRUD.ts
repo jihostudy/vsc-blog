@@ -11,9 +11,9 @@ import {
   updateDoc,
 } from "firebase/firestore";
 // type
-import { postType } from "../templates/post";
-import { folderType } from "../templates/folder";
-import { commentType } from "../templates/comment";
+import { postType } from "../types/post";
+import { folderType } from "../types/folder";
+import { commentType } from "../types/comment";
 
 const getCollection = (collectionName: "posts" | "folders" | "comments") =>
   collection(db, collectionName);
@@ -154,11 +154,6 @@ export const updateViewCount = async (postID: string) => {
 };
 
 // Delete
-
-//######################################################
-//########################PHASE2########################
-//######################################################
-
 export const deleteFolder = async (folderId: string) => {
   const allPosts: postType[] = await getAllPosts();
 
@@ -166,7 +161,7 @@ export const deleteFolder = async (folderId: string) => {
   Promise.all(
     allPosts.map(async (post) => {
       if (post.folderID == folderId) {
-        await deletePost(post.id)
+        await deletePost(post.id);
       }
     })
   );
@@ -181,12 +176,11 @@ export const deletePost = async (postId: string) => {
 
 //Put
 
-export const increaseTtabong = async (commentId: string, currentTtabong: number) => {
+export const increaseTtabong = async (
+  commentId: string,
+  currentTtabong: number
+) => {
   await updateDoc(doc(db, "comments", commentId), {
-    ttabong: ++currentTtabong
+    ttabong: ++currentTtabong,
   });
-}
-
-//######################################################
-//########################PHASE2########################
-//######################################################
+};

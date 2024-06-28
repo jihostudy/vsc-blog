@@ -10,8 +10,8 @@ import useFolderState from "@/lib/context/folderStore";
 import useFocusStore from "@/lib/context/focusStore";
 
 // Type
-import { postType } from "@/lib/templates/post";
-import { clientFolderType, folderType } from "@/lib/templates/folder";
+import { postType } from "@/lib/types/post";
+import { clientFolderType, folderType } from "@/lib/types/folder";
 
 interface TabProps {
   posts: postType[];

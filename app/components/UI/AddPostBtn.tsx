@@ -1,10 +1,9 @@
 "use client";
-
 import React, { ReactNode, useEffect, useState } from "react";
 // Firebase
 import { addPost } from "@/lib/firebase/firebaseCRUD";
 // Type
-import { postType } from "@/lib/templates/post";
+import { postType } from "@/lib/types/post";
 //Images & Icons
 import { Button } from "@nextui-org/react";
 import Typography from "@mui/material/Typography";
@@ -42,7 +41,7 @@ const style = {
 
 const AddPostBtn = ({ isEditing, newPost }: SubmitBtnProps): ReactNode => {
   const router = useRouter();
-  const {unsetIsEditState} = useIsEditState();
+  const { unsetIsEditState } = useIsEditState();
   // States
   const [open, setOpen] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);

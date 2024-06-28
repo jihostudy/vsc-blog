@@ -8,10 +8,10 @@ import React, {
 } from "react";
 // Icons & Images
 // Type
-import { postType, initPost } from "@/lib/templates/post";
+import { postType, initPost } from "@/lib/types/post";
 import AddPostBtn from "../UI/AddPostBtn";
 import useFocusStore from "@/lib/context/focusStore";
-import { clientFolderType, folderType } from "@/lib/templates/folder";
+import { clientFolderType, folderType } from "@/lib/types/folder";
 import usePostStore from "@/lib/context/postStore";
 import useFolderState from "@/lib/context/folderStore";
 import SelectFolderBtn from "@/app/components/UI/SelectFolderBtn";
@@ -22,32 +22,30 @@ interface PostEditorProps {
   folders: folderType[];
 }
 const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
-
-//######################################################
-//########################PHASE2########################
-//######################################################
   const { isEditing, postId } = useIsEditState();
-  console.log(folders)
-  const editingPost: postType|undefined = posts.find(post => post.id == postId);
+  console.log(folders);
+  const editingPost: postType | undefined = posts.find(
+    (post) => post.id == postId
+  );
 
   // State
   const { postState, setPostState } = usePostStore();
   const { folderState, setFolderState } = useFolderState();
   const { focusedSupFolderID: focusedSupFolderID } = useFocusStore();
 
-  const initialPost:postType = isEditing && editingPost ? {
-    id: editingPost.id, // 파베 받은 data
-    contents: editingPost.contents,
-    timeStamp: new Date(editingPost.timeStamp),
-    title: editingPost.title,
-    viewCount: editingPost.viewCount,
-    folderID: editingPost.folderID,
-  } : initPost;
+  const initialPost: postType =
+    isEditing && editingPost
+      ? {
+          id: editingPost.id, // 파베 받은 data
+          contents: editingPost.contents,
+          timeStamp: new Date(editingPost.timeStamp),
+          title: editingPost.title,
+          viewCount: editingPost.viewCount,
+          folderID: editingPost.folderID,
+        }
+      : initPost;
 
   const [newPost, setNewPost] = useState<postType>(initialPost);
-//######################################################
-//########################PHASE2########################
-//######################################################
   const [maxLineNumber, setMaxLineNumber] = useState<number>(1);
   // Ref
   const lineNumberRef = useRef<HTMLTextAreaElement>(null);
@@ -78,10 +76,11 @@ const PostEditor = ({ posts, folders }: PostEditorProps): ReactNode => {
     setFolderState(clientFolderState);
 
     // 초기설정
-    !isEditing && setNewPost((prev) => ({
-      ...prev,
-      folderID: focusedSupFolderID,
-    }));
+    !isEditing &&
+      setNewPost((prev) => ({
+        ...prev,
+        folderID: focusedSupFolderID,
+      }));
   }, []);
   // functions
   const handleContentChange = (contents: string): void => {

@@ -1,7 +1,7 @@
 "use client";
 import useFolderState from "@/lib/context/folderStore";
-import { clientFolderType, initClientfolder } from "@/lib/templates/folder";
-import { postType } from "@/lib/templates/post";
+import { clientFolderType, initClientfolder } from "@/lib/types/folder";
+import { postType } from "@/lib/types/post";
 import {
   Box,
   FormControl,
@@ -13,7 +13,7 @@ import {
 import React, { ChangeEvent, ReactNode } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 interface SelectFolderBtnProps {
-  folderId:string;
+  folderId: string;
   handleFolderChange: (folderID: string) => void;
 }
 

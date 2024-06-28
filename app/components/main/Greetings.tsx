@@ -10,8 +10,8 @@ import { UserInfo } from "@/public/Info/UserInfo";
 import VSCLogo from "@/public/icons/vscode_black.svg";
 import GithubLogo from "@/public/icons/github.png";
 // types
-import { postType } from "@/lib/templates/post";
-import { clientFolderType, folderType } from "@/lib/templates/folder";
+import { postType } from "@/lib/types/post";
+import { clientFolderType, folderType } from "@/lib/types/folder";
 import Image from "next/image";
 
 interface PostProps {
